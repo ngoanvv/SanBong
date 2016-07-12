@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -45,7 +47,7 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
         map.addMarker( new MarkerOptions().position(new LatLng(21.0237642,105.8334160)));
         map.addMarker( new MarkerOptions().position(new LatLng(21.0277643,105.8534160)));
         map.addMarker( new MarkerOptions().position(new LatLng(21.029977644,105.8634160)));
-
+        moveCamera(new LatLng(21.029977644,105.8634160));
         map.setOnMarkerClickListener(this);
     }
     @Override
@@ -55,18 +57,19 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
             map = fragment.getMap();
         }
     }
-
+    public void moveCamera(LatLng latLng)
+    {
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        map.animateCamera(cameraUpdate);
+    }
     @Override
     public boolean onMarkerClick(Marker marker) {
         {
-
             PitchFragment pitchFragment = new PitchFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,pitchFragment,TAG).commit();
             Log.d("marker",marker.getPosition().latitude+":"+marker.getPosition().longitude);
         }
-
-
         return false;
     }
 }

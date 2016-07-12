@@ -1,4 +1,4 @@
-package com.sanbong.ui;
+package com.sanbong;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,11 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sanbong.R;
 import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
 import com.sanbong.fragment.MyMapFragment;
+import com.sanbong.ui.LoginActivity;
+import com.sanbong.ui.NavigationDrawerCallbacks;
+import com.sanbong.ui.NavigationDrawerFragment;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, View.OnClickListener,

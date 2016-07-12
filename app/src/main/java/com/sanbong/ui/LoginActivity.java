@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.sanbong.MainActivity;
 import com.sanbong.R;
 import com.sanbong.utils.ShowToask;
 
