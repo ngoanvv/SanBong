@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/coloWhite"
+              android:orientation="vertical">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:id="@+id/title"
+        android:text="@string/logout2"
+        android:textColor="@color/lightGreen"
+        android:textSize="@dimen/text_size_20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/id_dialog_ok"
+            android:layout_width="@dimen/height_0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lightGreen"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/ok"
+            android:textSize="@dimen/text_size_15sp" />
+
+
+        <Button
+            android:id="@+id/id_dialog_cancel"
+            android:textColor="@color/lightGreen"
+            android:layout_width="@dimen/height_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/txt_no"
+            android:textSize="@dimen/text_size_15sp" />
+    </LinearLayout>
+
+</LinearLayout>

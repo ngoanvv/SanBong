@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/coloWhite"
+              android:orientation="vertical">
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20dp"
+        android:text="@string/action_search"
+        android:layout_gravity="center"
+        android:textColor="@color/lightGreen"
+        android:textSize="@dimen/text_size_30sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20dp"
+        android:text="@string/chon_diadiem"
+        android:textColor="@color/lightGreen"
+        android:textSize="@dimen/text_size_20sp" />
+
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:id="@+id/search_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:popupBackground="@color/coloWhite"
+        android:hint="@string/chon_diadiem"
+        android:textColorHint="#05ab9a"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20dp"
+        android:text="@string/chon_loaisan"
+        android:textColor="@color/lightGreen"
+        android:textSize="@dimen/text_size_20sp" />
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:id="@+id/search_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:popupBackground="@color/coloWhite"
+
+        android:layout_marginRight="50dp"
+        android:hint="@string/chon_loaisan"
+        android:textColorHint="#05ab9a"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/id_dialog_ok"
+            android:layout_width="@dimen/height_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/lightGreen"
+            android:background="@android:color/transparent"
+            android:text="@string/txt_yes"
+            android:textSize="@dimen/text_size_15sp" />
+
+
+        <Button
+            android:id="@+id/id_dialog_cancel"
+            android:layout_width="@dimen/height_0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lightGreen"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/txt_no"
+            android:textSize="@dimen/text_size_15sp" />
+    </LinearLayout>
+
+</LinearLayout>
