@@ -1,9 +1,9 @@
 package com.sanbong.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sanbong.R;
-import com.sanbong.ui.PitchFragment;
+import com.sanbong.ui.PitchDetailActivity;
 
 /**
  * Created by poliveira on 11/03/2015.
@@ -65,10 +65,8 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
     @Override
     public boolean onMarkerClick(Marker marker) {
         {
-            PitchFragment pitchFragment = new PitchFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,pitchFragment,TAG).commit();
-            Log.d("marker",marker.getPosition().latitude+":"+marker.getPosition().longitude);
+            Intent intent = new Intent(getActivity(), PitchDetailActivity.class);
+            startActivity(intent);
         }
         return false;
     }

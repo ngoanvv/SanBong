@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void onLoginFailed() {
 
-        ShowToask.showToaskLong(LoginActivity.this,getString(R.string.logout)+" "+getString(R.string.failed));
+        ShowToask.showToaskLong(LoginActivity.this,getString(R.string.login)+" "+getString(R.string.failed));
 
     }
     public void login(String email,String password) {

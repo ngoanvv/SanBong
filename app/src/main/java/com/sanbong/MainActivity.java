@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     Fragment fragment;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +43,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
 
 
-    public void initDrawer()
-    {
+    public void initDrawer() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_drawer);
@@ -54,10 +54,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setUserData("Diep NV, UET", "Email : diep170995@gmail.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
 
     }
-    public void initView()
-    {
+
+    public void initView() {
 
     }
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         switch (position) {
@@ -66,9 +67,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragment = getSupportFragmentManager().findFragmentByTag(MyMapFragment.TAG);
                 if (fragment == null) {
                     fragment = new MyMapFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
                 break;
+
             }
             case 1:
             {//stats
