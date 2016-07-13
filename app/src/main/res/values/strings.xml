@@ -3,11 +3,13 @@
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Cài đặt</string>
-    <string name="settings">Cài đặt</string>
+    <string name="nhankeo">Tìm kèo để nhận</string>
     <string name="logout">Đăng xuất</string>
     <string name="logout2">Bạn có muốn đăng xuất khỏi ứng dụng không ?</string>
+    <string name="giovang">Sân đẹp giờ vàng</string>
+    <string name="themsan">Thêm sân</string>
 
-    <string name="myaccount">Quản lý tài khoản</string>
+    <string name="mypitch">Quản lý sân bóng</string>
     <string name="book">Đặt sân</string>
     <string name="vs">Tìm đối thủ</string>
     <string name="pass_length">Độ dài mật khẩu từ 4-10 kí tự</string>
@@ -16,6 +18,8 @@
     <string name="invalid_repassword">Mật khẩu xác nhận không khớp</string>
     <string name="login">Đăng nhập</string>
     <string name="link_signUp">Chưa có tài khoản ? Đăng ký ngay</string>
+    <string name="forgot">Quên mật khẩu ?</string>
+    <string name="settings">Cài đặt</string>
 
     <string name="chusan">Chủ sân</string>
     <string name="khachang">Khách hàng</string>

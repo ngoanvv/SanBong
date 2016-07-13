@@ -17,7 +17,9 @@ import android.view.View;
 import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
+import com.sanbong.fragment.FindMatchFragment;
 import com.sanbong.fragment.MyMapFragment;
+import com.sanbong.fragment.OrderFragment;
 import com.sanbong.ui.LoginActivity;
 import com.sanbong.ui.NavigationDrawerCallbacks;
 import com.sanbong.ui.NavigationDrawerFragment;
@@ -64,35 +66,47 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 0: //case tim kiem
             {
-                fragment = getSupportFragmentManager().findFragmentByTag(MyMapFragment.TAG);
-                if (fragment == null) {
                     fragment = new MyMapFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
-                }
                 break;
 
             }
-            case 1:
+            case 1: // dat san
             {//stats
+                fragment = new OrderFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, OrderFragment.TAG).commit();
                 break;
             }
-            case 2: //my account //todo
+            case 2: //tim doi thu //todo
+            {
+                fragment = new FindMatchFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, FindMatchFragment.TAG).commit();
+                break;
+            }
+            case 3: {//San dep gio vang //todo
+                break;
+            }
+            case 4 :  // them san
             {
                 break;
             }
-            case 3: {//settings //todo
-                break;
-            }
-            case 4 :
+            case 5 : // quan ly san bong
             {
+
                 break;
             }
-            case 5 :
+            case 6 : // cai dat
+            {
+
+                break;
+            }
+            case 7 : // dang xuat
             {
                 showDialogLogout();
 
                 break;
             }
+
         }
     }
 
@@ -171,12 +185,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         int id = v.getId();
         switch (id)
         {
-//            case R.id.bt_search :
-//            {
-//                Log.d("search","clicked");
-//                showPlace("Sân số 2");
-//                break;
-//            }
         }
     }
 

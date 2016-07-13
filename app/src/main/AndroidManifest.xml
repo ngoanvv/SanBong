@@ -32,7 +32,7 @@
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_maps"
-            android:noHistory="true">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -44,6 +44,8 @@
         <activity android:name=".ui.SignUpActivity">
         </activity>
         <activity android:name=".ui.PitchDetailActivity">
+        </activity>
+        <activity android:name=".ui.ForgotPasswordActivity">
         </activity>
     </application>
 

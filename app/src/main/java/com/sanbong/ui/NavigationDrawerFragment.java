@@ -125,7 +125,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_action_search)));
         items.add(new NavigationItem(getString(R.string.book), getResources().getDrawable(R.drawable.book)));
         items.add(new NavigationItem(getString(R.string.vs), getResources().getDrawable(R.drawable.book)));
-        items.add(new NavigationItem(getString(R.string.myaccount), getResources().getDrawable(R.drawable.ic_action_account_box)));
+        items.add(new NavigationItem(getString(R.string.giovang), getResources().getDrawable(R.drawable.ic_action_account_box)));
+        items.add(new NavigationItem(getString(R.string.themsan), getResources().getDrawable(R.drawable.ic_action_account_box)));
+        items.add(new NavigationItem(getString(R.string.mypitch), getResources().getDrawable(R.drawable.ic_action_account_box)));
         items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_action_settings)));
         items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));
 //        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));

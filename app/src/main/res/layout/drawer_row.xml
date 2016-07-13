@@ -21,6 +21,6 @@
         android:layout_gravity="center"
         android:textSize="14sp"
         android:gravity="center_vertical"
-        android:textColor="@color/myTextPrimaryColor"/>
+        android:textColor="@color/coloWhite"/>
 
 </LinearLayout>

@@ -16,7 +16,7 @@ import com.sanbong.R;
 import com.sanbong.utils.ShowToask;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView tv_signUp,bt_login;
+    TextView tv_signUp,bt_login,tv_forgot;
     EditText edt_email,edt_password;
     SharedPreferences sharedPreferences;
 
@@ -66,11 +66,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void initView()
     {
         tv_signUp = (TextView) findViewById(R.id.link_signup);
+        tv_forgot = (TextView) findViewById(R.id.link_forgot);
         bt_login= (TextView) findViewById(R.id.btn_login);
         edt_password = (EditText) findViewById(R.id.input_password);
         edt_email = (EditText) findViewById(R.id.input_email);
         bt_login.setOnClickListener(this);
         tv_signUp.setOnClickListener(this);
+        tv_forgot.setOnClickListener(this);
     }
     public boolean validate(String email,String password) {
         boolean valid = true;
@@ -127,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = edt_password.getText().toString();
         saveUserData(email,password);
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
-
+        finish();
     }
 
 
@@ -144,6 +146,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login :
             {
                 login(edt_email.getText().toString(),edt_password.getText().toString());
+                break;
+            }
+            case R.id.link_forgot :
+            {
+                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
                 break;
             }
         }
