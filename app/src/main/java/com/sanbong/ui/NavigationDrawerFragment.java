@@ -122,14 +122,14 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_action_search)));
-        items.add(new NavigationItem(getString(R.string.book), getResources().getDrawable(R.drawable.book)));
-        items.add(new NavigationItem(getString(R.string.vs), getResources().getDrawable(R.drawable.book)));
-        items.add(new NavigationItem(getString(R.string.giovang), getResources().getDrawable(R.drawable.ic_action_account_box)));
-        items.add(new NavigationItem(getString(R.string.themsan), getResources().getDrawable(R.drawable.ic_action_account_box)));
-        items.add(new NavigationItem(getString(R.string.mypitch), getResources().getDrawable(R.drawable.ic_action_account_box)));
-        items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_action_settings)));
-        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));
+        items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_search)));
+        items.add(new NavigationItem(getString(R.string.book), getResources().getDrawable(R.drawable.ic_competitor)));
+        items.add(new NavigationItem(getString(R.string.vs), getResources().getDrawable(R.drawable.ic_friendly)));
+        items.add(new NavigationItem(getString(R.string.giovang), getResources().getDrawable(R.drawable.ic_clock)));
+        items.add(new NavigationItem(getString(R.string.themsan), getResources().getDrawable(R.drawable.ic_stadium)));
+        items.add(new NavigationItem(getString(R.string.mypitch), getResources().getDrawable(R.drawable.ic_stadium)));
+        items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_setting)));
+        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.ic_logout)));
 //        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));
 
         return items;

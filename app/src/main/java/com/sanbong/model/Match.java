@@ -7,8 +7,26 @@ public class Match {
     String id;
     String time;
     String hostName;
+    String stadium;
     String description;
     String location;
+    String money;
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getStadium() {
+        return stadium;
+    }
+
+    public void setStadium(String stadium) {
+        this.stadium = stadium;
+    }
 
     public String getId() {
         return id;

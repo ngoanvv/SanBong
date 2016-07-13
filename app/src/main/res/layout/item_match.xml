@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+    <com.sanbong.custom_view.RoundedImageView
+        android:layout_width="@dimen/height_50dp"
+        android:background="@drawable/icon_team"
+        android:layout_height="@dimen/height_50dp"
+        android:id="@+id/view"/>
+    <TextView
+        android:id="@+id/items_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Chelsea FC"
+        android:textSize="@dimen/text_size_20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlack"
+        android:layout_alignBottom="@+id/view"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xin chào các bạn, team mình là Chelsea FC. Mong đá giao hữu nhẹ nhẹ tình cảm"
+        android:textSize="@dimen/text_size_15sp"
+        android:layout_marginLeft="80dp"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black"
+        android:layout_alignBottom="@+id/view"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="20dp">
+        <com.sanbong.custom_view.RoundedImageView
+            android:layout_width="20dp"
+            android:background="@drawable/ic_money"
+            android:layout_height="20dp"/>
+            <TextView
+                android:id="@+id/item_money"
+                android:layout_width="wrap_content"
+                android:text="250k, chia đôi"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <com.sanbong.custom_view.RoundedImageView
+                android:layout_width="20dp"
+                android:background="@drawable/ic_clock"
+                android:layout_height="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/item_time"
+                android:text="18h, ngày 28/12/2016"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <com.sanbong.custom_view.RoundedImageView
+                android:layout_width="20dp"
+                android:background="@drawable/ic_stadium"
+                android:layout_height="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/item_stadium"
+                android:text="Sân bóng FECON"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <com.sanbong.custom_view.RoundedImageView
+                android:layout_width="20dp"
+                android:background="@drawable/ic_location"
+                android:layout_height="20dp"/>
+            <TextView
+                android:id="@+id/item_location"
+                android:layout_width="wrap_content"
+                android:text="144 Xuân Thủy, Cầu Giấy, Hà Nội"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
