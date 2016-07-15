@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sanbong.R;
 import com.sanbong.model.Match;
+import com.sanbong.utils.ShowToask;
 
 import java.util.ArrayList;
 
@@ -49,9 +51,13 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
     public int getItemCount() {
         return list.size();
     }
+
+
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tv_hostname,tv_time,tv_location,tv_stadium,tv_money,tv_descrip;
         LinearLayout ll_match;
+        Button accept,readmore;
+
         public RecyclerViewHolder(View itemView) {
             super(itemView);
 
@@ -62,19 +68,33 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
             tv_money = (TextView) itemView.findViewById(R.id.item_money);
             tv_descrip = (TextView) itemView.findViewById(R.id.item_description);
             ll_match = (LinearLayout) itemView.findViewById(R.id.ll_match);
+            accept = (Button) itemView.findViewById(R.id.bt_accept);
+            readmore = (Button) itemView.findViewById(R.id.bt_readmore);
 
+            accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShowToask.showToaskLong(context,"Accept this match ?");
+                }
+            });
+            readmore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    matchClickInterface.onMatchClick();
+
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                         matchClickInterface.onMatchClick();
                         Log.d("match click","true");
-
                 }
             });
         }
 
     }
+
     public MatchClickInterface matchClickInterface;
     public void setMatchClickInterface(MatchClickInterface matchClickInterface)
     {

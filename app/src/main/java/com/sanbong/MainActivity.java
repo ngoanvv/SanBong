@@ -134,7 +134,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         if (mNavigationDrawerFragment.isDrawerOpen())
             mNavigationDrawerFragment.closeDrawer();
         else {
-            closeApp();
         }
     }
 

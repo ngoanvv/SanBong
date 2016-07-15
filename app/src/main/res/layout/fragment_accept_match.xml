@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
                 android:orientation="vertical"
+              android:background="@drawable/ic_bh"
                 android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
@@ -90,7 +91,7 @@
             android:textColor="@color/colorBlack"
             android:textStyle="italic"
             android:textSize="@dimen/text_size_15sp"
-            android:text="The Red devis"
+            android:text="The Red devils"
             />
     </LinearLayout>
 </LinearLayout>
@@ -123,7 +124,7 @@
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/accent_material_light"
+            android:textColor="@color/coloWhite"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -146,7 +147,7 @@
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/accent_material_light"
+            android:textColor="@color/coloWhite"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -168,7 +169,7 @@
             android:text="Sân bóng FECON"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/accent_material_light"
+            android:textColor="@color/coloWhite"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -193,7 +194,7 @@
             android:text="144 Xuân Thủy, Cầu Giấy, Hà Nội"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/accent_material_light"
+            android:textColor="@color/coloWhite"
             android:clickable="true"/>
     </LinearLayout>
     <RelativeLayout

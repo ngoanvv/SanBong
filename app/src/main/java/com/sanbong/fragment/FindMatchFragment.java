@@ -76,11 +76,11 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     public ArrayList<Match> initData()
     {
         listMatches = new ArrayList<>();
+        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu nhẹ nhàng, mong gặp đối thủ lâu dài thường xuyên, liên hệ số 0998989898","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
         listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
         listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
         listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy, Hà Nội","100k chia đôi"));
         return listMatches;
     }
     @Override
@@ -93,7 +93,7 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     public void onMatchClick() {
         Log.d("match click","received");
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container,new AcceptMatchFragment(),AcceptMatchFragment.TAG).commit();
+                .replace(R.id.container,new AcceptMatchFragment(),AcceptMatchFragment.TAG).addToBackStack(null).commit();
     }
 }
 
