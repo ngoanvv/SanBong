@@ -45,12 +45,12 @@
     <color name="colorCurrentRating">#5c7a94</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorlightGreen">#4cb050</color>
-    <color name="lightGreen">#4cb050</color>
+    <color name="lightGreen">#43973A</color>
+    <color name="colorlightGreen">#43973A</color>
 
-    <color name="colorGreen203">#FFCEFFD0</color>
+    <color name="colorGreen203">#58C14D</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorRed">#FF0000</color>
+    <color name="colorRed">#901212</color>
     <color name="colorGray">#959595</color>
     <color name="color70Gray">#A4A4A4</color>
     <color name="myPrimaryColor">#00BCD4</color>

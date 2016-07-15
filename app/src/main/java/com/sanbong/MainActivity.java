@@ -73,12 +73,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
             case 1: // dat san
             {//stats
+                getSupportActionBar().setTitle("Đặt sân");
+                getSupportFragmentManager().popBackStack();
                 fragment = new OrderFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, OrderFragment.TAG).commit();
                 break;
             }
             case 2: //tim doi thu //todo
             {
+                getSupportActionBar().setTitle("Kèo bóng");
+                getSupportFragmentManager().popBackStack();
                 fragment = new FindMatchFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, FindMatchFragment.TAG).commit();
                 break;

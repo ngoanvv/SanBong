@@ -39,6 +39,8 @@
 
     <string name="chon_diadiem">Chọn khu vực</string>
     <string name="chon_loaisan">Chọn loại sân</string>
+    <string name="chon_gio">Chọn thời gian</string>
+
     <string name="input">Name</string>
     <string name="title_activity_login2">Sign in</string>
     <string name="exit_dialog">Bạn có muốn đóng khỏi ứng dụng không ?</string>

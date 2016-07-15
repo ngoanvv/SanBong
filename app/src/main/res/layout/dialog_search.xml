@@ -48,7 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:popupBackground="@color/coloWhite"
-
         android:layout_marginRight="50dp"
         android:hint="@string/chon_loaisan"
         android:textColorHint="#05ab9a"

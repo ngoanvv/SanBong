@@ -26,13 +26,16 @@
                 android:orientation="horizontal">
             </RelativeLayout>
 
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:clickable="true"
-                android:layout_height="match_parent"/>
         </LinearLayout>
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
+
+
     <!-- android:layout_marginTop="?android:attr/actionBarSize"-->
     <com.sanbong.ui.ScrimInsetsFrameLayout
         android:id="@+id/scrimInsetsFrameLayout"

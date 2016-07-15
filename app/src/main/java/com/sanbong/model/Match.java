@@ -12,6 +12,16 @@ public class Match {
     String location;
     String money;
 
+    public Match(String id, String time, String hostName, String stadium, String description, String location, String money) {
+        this.id = id;
+        this.time = time;
+        this.hostName = hostName;
+        this.stadium = stadium;
+        this.description = description;
+        this.location = location;
+        this.money = money;
+    }
+
     public String getMoney() {
         return money;
     }
