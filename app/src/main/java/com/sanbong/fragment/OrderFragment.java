@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.sanbong.R;
 
 /**
@@ -15,8 +13,6 @@ import com.sanbong.R;
  */
 public class OrderFragment extends Fragment {
     public static final String TAG = "Order";
-    private SupportMapFragment fragment;
-    private GoogleMap map;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

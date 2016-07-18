@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 
 import com.sanbong.R;
 import com.sanbong.custom_view.NavigationItem;
+import com.sanbong.model.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
      */
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
+    private static final String TAG ="NavigationDrawerFragme";
     /**
      * Per the design guidelines, you should show the drawer on launch until the user manually
      * expands it. This shared preference tracks this.
@@ -70,6 +73,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
+    private String userType=UserModel.TYPE_TEAM;
+    public SharedPreferences userInfo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +89,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
+        userInfo = getActivity().getSharedPreferences("data",getContext().MODE_PRIVATE);
+        userType = userInfo.getString("userType",UserModel.TYPE_OWNER);
+        Log.d(TAG,userType);
     }
 
     @Override
@@ -96,6 +105,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mDrawerList.setHasFixedSize(true);
 
         final List<NavigationItem> navigationItems = getMenu();
+        Log.d(NavigationDrawerFragment.TAG,navigationItems.size()+" ");
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems);
         adapter.setNavigationDrawerCallbacks(this);
         mDrawerList.setAdapter(adapter);
@@ -121,18 +131,50 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     public List<NavigationItem> getMenu() {
-        List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_search)));
-        items.add(new NavigationItem(getString(R.string.book), getResources().getDrawable(R.drawable.ic_footballer)));
-        items.add(new NavigationItem(getString(R.string.vs), getResources().getDrawable(R.drawable.ic_deal)));
-        items.add(new NavigationItem(getString(R.string.giovang), getResources().getDrawable(R.drawable.ic_clock)));
-        items.add(new NavigationItem(getString(R.string.themsan), getResources().getDrawable(R.drawable.ic_stadium)));
-        items.add(new NavigationItem(getString(R.string.mypitch), getResources().getDrawable(R.drawable.ic_stadium)));
-        items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_settings)));
-        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.ic_logout)));
-//        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));
+        if(userType.equals(UserModel.TYPE_TEAM)) {
 
-        return items;
+            List<NavigationItem> items = new ArrayList<NavigationItem>();
+            //0
+            items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_search)));
+            //1
+            items.add(new NavigationItem(getString(R.string.book), getResources().getDrawable(R.drawable.ic_footballer)));
+            //2
+            items.add(new NavigationItem(getString(R.string.vs), getResources().getDrawable(R.drawable.ic_deal)));
+            //3
+            items.add(new NavigationItem(getString(R.string.giovang), getResources().getDrawable(R.drawable.ic_clock)));
+            //4
+            items.add(new NavigationItem(getString(R.string.dangtintimdoi), getResources().getDrawable(R.drawable.ic_deal)));
+            //5
+            items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_settings)));
+            //6
+            items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.ic_logout)));
+
+            return items;
+        }
+        else
+        {
+            List<NavigationItem> items = new ArrayList<NavigationItem>();
+            //0
+            items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_search)));
+            //1
+            items.add(new NavigationItem(getString(R.string.book), getResources().getDrawable(R.drawable.ic_footballer)));
+            //2
+            items.add(new NavigationItem(getString(R.string.vs), getResources().getDrawable(R.drawable.ic_deal)));
+            //3
+            items.add(new NavigationItem(getString(R.string.giovang), getResources().getDrawable(R.drawable.ic_clock)));
+            //4
+            items.add(new NavigationItem(getString(R.string.dangtintimdoi), getResources().getDrawable(R.drawable.ic_deal)));
+            // 5
+            items.add(new NavigationItem(getString(R.string.themsan), getResources().getDrawable(R.drawable.ic_stadium)));
+            //6
+            items.add(new NavigationItem(getString(R.string.mypitch), getResources().getDrawable(R.drawable.ic_stadium)));
+            //7
+            items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_settings)));
+            //8
+            items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.ic_logout)));
+
+            return items;
+        }
     }
 
     /**

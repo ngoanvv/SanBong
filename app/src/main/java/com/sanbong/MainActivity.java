@@ -20,6 +20,7 @@ import com.sanbong.dialog.SearchDialog;
 import com.sanbong.fragment.FindMatchFragment;
 import com.sanbong.fragment.MyMapFragment;
 import com.sanbong.fragment.OrderFragment;
+import com.sanbong.model.UserModel;
 import com.sanbong.ui.LoginActivity;
 import com.sanbong.ui.NavigationDrawerCallbacks;
 import com.sanbong.ui.NavigationDrawerFragment;
@@ -31,15 +32,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+    private static String TAG = "MainActivity";
     Dialog dialog;
     Fragment fragment;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
-
+    String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userType=getIntent().getStringExtra("userType");
         initDrawer();
         initView();
     }
@@ -48,6 +51,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void initDrawer() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
+
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_drawer);
         // Set up the drawer.
         getSupportActionBar().setTitle("Tìm sân bóng");
@@ -63,11 +67,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+
         switch (position) {
             case 0: //case tim kiem
             {
-                    fragment = new MyMapFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
+                fragment = new MyMapFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
                 break;
 
             }
@@ -88,30 +93,45 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
             }
             case 3: {//San dep gio vang //todo
+
                 break;
             }
-            case 4 :  // them san
-            {
-                break;
-            }
-            case 5 : // quan ly san bong
+            case 4: // dang tin tim doi
             {
 
                 break;
             }
-            case 6 : // cai dat
+            case 5: // cai dat cua team, them san cua owner
             {
 
                 break;
             }
-            case 7 : // dang xuat
+            case 6: // dang xuat cua team, quan ly san bong cua owner
             {
-                showDialogLogout();
-
+                if(userType.equals(UserModel.TYPE_TEAM)) {
+                    showDialogLogout();
+                    break;
+                }
+                if(userType.equals(UserModel.TYPE_OWNER))
+                {
+                    Log.d(MainActivity.TAG,"usertype : owner");
+                    break;
+                }
+            }
+            case 7: // cai dat cua owner
+            {
                 break;
+            }
+            case 8: //  dang xuat cua owner
+            {
+                if(userType.equals(UserModel.TYPE_OWNER)) {
+                    showDialogLogout();
+                    break;
+                }
             }
 
         }
+
     }
 
     private void showDialogLogout() {

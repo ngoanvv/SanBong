@@ -17,14 +17,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<String> list_userType,list_userAdd;
 
     EditText edt_userName,edt_password,edt_rePassword,edt_userEmail;
-
+    private EditText edt_phone;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         initData();
         initView();
         setListener();
@@ -38,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         edt_password = (EditText) findViewById(R.id.input_password);
         edt_rePassword = (EditText) findViewById(R.id.input_re_password);
         edt_userEmail = (EditText) findViewById(R.id.input_email);
+        edt_phone = (EditText) findViewById(R.id.input_phone);
         bt_signUp = (TextView) findViewById(R.id.btn_signUp);
         bt_login = (TextView) findViewById(R.id.link_login);
 
@@ -147,7 +147,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             valid=false;
             edt_rePassword.setError(getString(R.string.invalid_repassword));
             edt_password.setError(getString(R.string.invalid_repassword));
-            edt_password.setText("");
+            edt_rePassword.setText("");
             edt_password.setText("");
 
         }
@@ -155,6 +155,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         {
             edt_rePassword.setError(null);
             edt_password.setError(null);
+        }
+        if(edt_phone.length()<8)
+        {
+            valid=false;
+            edt_phone.setError(getString(R.string.invalid_repassword));
+            edt_phone.setText("");
+
+        }
+        else
+        {
+            edt_phone.setError(null);
+            edt_phone.setError(null);
         }
         return valid;
     }
