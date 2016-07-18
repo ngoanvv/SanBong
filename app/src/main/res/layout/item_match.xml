@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
+              xmlns:fancy="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
               android:layout_width="match_parent"
               android:id="@+id/ll_match"
               android:background="@drawable/border"
@@ -58,7 +59,7 @@
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="0dp"
@@ -168,35 +169,37 @@
            android:layout_height="wrap_content"
            android:layout_weight="3"
             >
-           <Button
-               android:id="@+id/bt_readmore"
-               android:layout_width="wrap_content"
-               android:layout_height="40dp"
-               android:text="Xem thêm"
-               android:gravity="center"
-               android:textSize="10sp"
-               android:textColor="@color/coloWhite"
-               android:theme="@style/MyButton"
-               style="@style/Widget.AppCompat.Button.Borderless"
-               android:background="@color/colorRed"
-               android:layout_gravity="center_vertical"
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/bt_readmore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                fancy:fb_textSize="10dp"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="#7ab800"
+                fancy:fb_focusColor="#9bd823"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Xem thêm"
+                fancy:fb_textColor="#FFFFFF"
                />
 
-        <Button
-            android:id="@+id/bt_accept"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Nhận ngay"
-            android:theme="@style/MyButton"
-            android:layout_marginTop="20dp"
-            android:textSize="10sp"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="@color/colorlightGreen"
-            android:textColor="@color/coloWhite"
-
-            />
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/bt_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                fancy:fb_textSize="10dp"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorRed"
+                fancy:fb_focusColor="#9bd823"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Nhận ngay"
+                fancy:fb_textColor="#FFFFFF"
+                />
         </LinearLayout>
 
     </LinearLayout>
