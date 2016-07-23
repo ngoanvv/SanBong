@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +14,8 @@ import com.sanbong.model.Match;
 import com.sanbong.utils.ShowToask;
 
 import java.util.ArrayList;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by Diep_Chelsea on 13/07/2016.
@@ -30,9 +31,9 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemview = inflater.inflate(R.layout.item_match, parent, false);
-        return new RecyclerViewHolder(itemview);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            View itemview = inflater.inflate(R.layout.item_match, parent, false);
+            return new RecyclerViewHolder(itemview);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tv_hostname,tv_time,tv_location,tv_stadium,tv_money,tv_descrip;
         LinearLayout ll_match;
-        Button accept,readmore;
+        FancyButton accept,readmore;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -68,8 +69,8 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
             tv_money = (TextView) itemView.findViewById(R.id.item_money);
             tv_descrip = (TextView) itemView.findViewById(R.id.item_description);
             ll_match = (LinearLayout) itemView.findViewById(R.id.ll_match);
-            accept = (Button) itemView.findViewById(R.id.bt_accept);
-            readmore = (Button) itemView.findViewById(R.id.bt_readmore);
+            accept = (FancyButton) itemView.findViewById(R.id.bt_accept);
+            readmore = (FancyButton) itemView.findViewById(R.id.bt_readmore);
 
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override

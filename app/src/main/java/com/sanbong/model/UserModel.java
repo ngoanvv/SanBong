@@ -6,7 +6,6 @@ package com.sanbong.model;
 public class UserModel {
     public static String TYPE_TEAM="TEAM";
     public static String TYPE_OWNER="OWNER";
-
     public String name;
     public String password;
     public String id;

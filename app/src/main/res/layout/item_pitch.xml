@@ -2,55 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               xmlns:fancy="http://schemas.android.com/apk/res-auto"
-              android:orientation="horizontal"
+              android:orientation="vertical"
               android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:text="Sân bóng FECON"
+
+        />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="wrap_content"
                   android:orientation="vertical"
                   android:layout_height="wrap_content"
-                  android:layout_marginTop="20dp"
-     >
+                  android:layout_marginTop="10dp">
 
-
-     <LinearLayout
-         android:layout_marginLeft="10dp"
-         android:layout_width="270dp"
-         android:layout_marginTop="5dp"
-         android:orientation="horizontal"
-         android:layout_height="wrap_content">
-
-         <com.sanbong.custom_view.RoundedImageView
-             android:layout_width="10dp"
-             android:layout_gravity="center_vertical"
-             android:background="@drawable/ic_stadium"
-             android:layout_height="10dp"/>
-            TextView
-             android:layout_width="100dp"
-             android:layout_height="wrap_content"
-             android:text="Tên sân bóng"
-             android:textSize="15sp"
-             android:layout_marginLeft="10dp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/colorBlack"
-             />
-         TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text=":"
-             android:textSize="15sp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/accent_material_light"
-             />
-         <TextView
-             android:layout_width="wrap_content"
-             android:id="@+id/item_stadium"
-             android:text="Sân bóng FECON"
-             android:textSize="15sp"
-             android:layout_marginLeft="10dp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/accent_material_light"
-             android:layout_height="wrap_content"/>
-     </LinearLayout>
      <LinearLayout
          android:layout_width="270dp"
         android:orientation="horizontal"
@@ -62,29 +40,12 @@
             android:background="@drawable/ic_money"
             android:layout_gravity="center_vertical"
             android:layout_height="10dp"/>
-         TextView
-             android:layout_width="100dp"
-             android:layout_height="wrap_content"
-             android:text="Giá tiền"
-             android:textSize="15sp"
-             android:layout_marginLeft="10dp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/colorBlack"
-             />
-         TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text=":"
-             android:textSize="15sp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/accent_material_light"
-             />
         <TextView
             android:id="@+id/item_money"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="250k - 90 phút, miễn phí 2 bình nước"
+            android:text="Mức giá "
             android:ellipsize="end"
             android:textSize="15sp"
             android:maxLines="3"
@@ -144,27 +105,10 @@
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_manager"
             android:layout_height="10dp"/>
-        TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Quản lý"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/colorBlack"
-            />
-        TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=":"
-            android:textSize="15sp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/accent_material_light"
-            />
         <TextView
+            android:id="@+id/item_owner"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:id="@+id/item_time"
             android:text="Anh Hưng"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
@@ -172,9 +116,7 @@
             android:textColor="@color/accent_material_light"
             />
     </LinearLayout>
-    <!--//stadium-->
 
-    <!--location-->
 
      <LinearLayout
          android:layout_marginLeft="10dp"
@@ -188,23 +130,6 @@
              android:layout_width="10dp"
              android:background="@drawable/ic_phone"
              android:layout_height="10dp"/>
-         TextView
-             android:layout_width="100dp"
-             android:layout_height="wrap_content"
-             android:text="Liên hệ"
-             android:textSize="15sp"
-             android:layout_marginLeft="10dp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/colorBlack"
-             />
-         TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text=":"
-             android:textSize="15sp"
-             android:layout_gravity="center_vertical"
-             android:textColor="@color/accent_material_light"
-             />
          <TextView
              android:id="@+id/item_contact"
              android:layout_width="200dp"
@@ -228,7 +153,6 @@
         android:id="@+id/bt_readmore"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         fancy:fb_textSize="10dp"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
@@ -243,7 +167,7 @@
         android:id="@+id/bt_orernow"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         fancy:fb_textSize="10dp"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
@@ -254,8 +178,8 @@
         fancy:fb_text="Đặt ngay"
         fancy:fb_textColor="#FFFFFF"
         />
-   </LinearLayout>
-
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 
 

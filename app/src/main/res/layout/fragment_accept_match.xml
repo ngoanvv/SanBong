@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-                android:orientation="vertical"
+              xmlns:fancy="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
               android:background="@drawable/img_background"
-                android:layout_height="match_parent">
+              android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -203,33 +204,43 @@
         android:orientation="horizontal"
         android:layout_marginTop="40dp"
         >
-        <Button
-            android:layout_width="wrap_content"
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Liên hệ"
             android:textColor="@color/coloWhite"
             android:theme="@style/MyButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:background="@color/colorRed"
             android:layout_gravity="center_vertical"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="50dp"
+            fancy:fb_textSize="20dp"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_defaultColor="#7ab800"
+            fancy:fb_focusColor="#9bd823"
+            fancy:fb_iconPosition="left"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="Liên hệ"
+            fancy:fb_textColor="#FFFFFF"
             />
-        <Button
-            android:layout_width="wrap_content"
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Nhận kèo"
-            android:theme="@style/MyButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_gravity="center_vertical"
-            android:background="@color/colorlightGreen"
-            android:id="@+id/button"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_defaultColor="@color/colorRed"
+            fancy:fb_focusColor="#9bd823"
+            fancy:fb_iconPosition="left"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="Nhận kèo"
+            fancy:fb_textColor="#FFFFFF"
+            fancy:fb_textSize="20dp"
             android:textColor="@color/coloWhite"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="70dp"
+            android:layout_marginRight="50dp"
             />
     </RelativeLayout>
 
