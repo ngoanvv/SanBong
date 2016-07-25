@@ -10,11 +10,10 @@ import android.widget.TextView;
 
 import com.sanbong.R;
 
-
 /**
- * Created by Diep_Chelsea on 06/07/2016.
+ * Created by Diep_Chelsea on 25/07/2016.
  */
-public class CloseDialog extends DialogFragment implements View.OnClickListener {
+public class AcceptMatchDialog extends DialogFragment implements View.OnClickListener {
     public static final String TAG = "DeleteOffer";
     public Button bt_ok,bt_cancel;
     TextView title;
@@ -32,7 +31,7 @@ public class CloseDialog extends DialogFragment implements View.OnClickListener 
 
         bt_ok.setOnClickListener(this);
         bt_cancel.setOnClickListener(this);
-        title.setText(getString(R.string.exit_dialog));
+        title.setText(getString(R.string.accept_match));
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(view);
         return dialog;
@@ -58,18 +57,16 @@ public class CloseDialog extends DialogFragment implements View.OnClickListener 
     }
 
     private void handleOkEvent() {
-        mCloseInterface.onClose();
+        matchClick.onAcceptInDialog();
+        dismiss();
     }
-
-    CloseInterface mCloseInterface;
-    public void setmCloseInterface(CloseInterface mLogoutInterface2)
+    public onAcceptMatchClick matchClick;
+    public void setAcceptMatch(onAcceptMatchClick m)
     {
-        mCloseInterface=mLogoutInterface2;
+        this.matchClick=m;
     }
-    public interface CloseInterface
+    public interface onAcceptMatchClick
     {
-        void onClose();
-
+        void onAcceptInDialog();
     }
-
 }

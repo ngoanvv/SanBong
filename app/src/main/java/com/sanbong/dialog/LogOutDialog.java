@@ -20,7 +20,7 @@ public class LogOutDialog extends DialogFragment implements View.OnClickListener
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Context mContext = getActivity();
         Dialog dialog = new CustomDialog(mContext);
-        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_logout, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
 
         bt_ok = (Button) view.findViewById(R.id.id_dialog_ok);
         bt_cancel = (Button) view.findViewById(R.id.id_dialog_cancel);

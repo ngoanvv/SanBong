@@ -6,7 +6,7 @@ package com.sanbong.model;
 public class Pitch {
     String id;
     String ownerId;
-    String money1;
+    String money;
     String money2;
     String money3;
 
@@ -14,6 +14,18 @@ public class Pitch {
     String location;
     String ownerName;
     String ownerPhone;
+
+    public Pitch(String id, String ownerId, String money, String name, String location, String ownerName, String ownerPhone) {
+        this.id = id;
+        this.ownerId = ownerId;
+        this.money = money;
+        this.money2 = money2;
+        this.money3 = money3;
+        this.name = name;
+        this.location = location;
+        this.ownerName = ownerName;
+        this.ownerPhone = ownerPhone;
+    }
 
     public String getId() {
         return id;
@@ -31,12 +43,12 @@ public class Pitch {
         this.ownerId = ownerId;
     }
 
-    public String getMoney1() {
-        return money1;
+    public String getMoney() {
+        return money;
     }
 
-    public void setMoney1(String money1) {
-        this.money1 = money1;
+    public void setmoney(String money) {
+        this.money= money;
     }
 
     public String getMoney2() {

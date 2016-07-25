@@ -3,7 +3,8 @@
               android:layout_width="match_parent"
               xmlns:fancy="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
-              android:layout_height="match_parent">
+              android:background="@drawable/border"
+              android:layout_height="wrap_content">
 
 
     <TextView
@@ -27,6 +28,7 @@
                   android:layout_width="wrap_content"
                   android:orientation="vertical"
                   android:layout_height="wrap_content"
+                  android:paddingBottom="10dp"
                   android:layout_marginTop="10dp">
 
      <LinearLayout
@@ -145,15 +147,14 @@
    <LinearLayout
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginLeft="20dp"
        android:layout_marginTop="20dp"
        android:orientation="vertical"
        >
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/bt_readmore"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        fancy:fb_textSize="10dp"
+        fancy:fb_textSize="13dp"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="#7ab800"
@@ -164,11 +165,12 @@
         fancy:fb_textColor="#FFFFFF"
         />
     <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/bt_orernow"
-        android:layout_width="70dp"
+        android:id="@+id/bt_booknow"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        fancy:fb_textSize="10dp"
+
+        fancy:fb_textSize="13dp"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="@color/colorRed"

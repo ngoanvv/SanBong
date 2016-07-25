@@ -18,16 +18,18 @@ import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
 import com.sanbong.fragment.FindMatchFragment;
+import com.sanbong.fragment.FindPitchFragment;
 import com.sanbong.fragment.MyMapFragment;
-import com.sanbong.fragment.OrderFragment;
 import com.sanbong.model.UserModel;
 import com.sanbong.ui.LoginActivity;
 import com.sanbong.ui.NavigationDrawerCallbacks;
 import com.sanbong.ui.NavigationDrawerFragment;
+import com.sanbong.utils.ShowToask;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, View.OnClickListener,
-        SearchDialog.SearchEventInterface,LogOutDialog.LogoutInterface, CloseDialog.CloseInterface {
+        SearchDialog.SearchEventInterface,LogOutDialog.LogoutInterface, CloseDialog.CloseInterface
+        {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -80,8 +82,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             {//stats
                 getSupportActionBar().setTitle("Đặt sân");
                 getSupportFragmentManager().popBackStack();
-                fragment = new OrderFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, OrderFragment.TAG).commit();
+                fragment = new FindPitchFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, FindPitchFragment.TAG).commit();
                 break;
             }
             case 2: //tim doi thu //todo
@@ -220,7 +222,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
 
     }
-
+    public void acceptMatch()
+    {
+        ShowToask.showToaskLong(MainActivity.this,"Accept Match");
+    };
     @Override
     public void onLogOutEvent() {
         logOut();
@@ -230,4 +235,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void onClose() {
         finish();
     }
+
+
 }

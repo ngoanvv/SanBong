@@ -59,7 +59,6 @@
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="0dp"
@@ -189,7 +188,7 @@
                 android:id="@+id/bt_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 fancy:fb_textSize="13dp"
                 fancy:fb_borderColor="#FFFFFF"
                 fancy:fb_borderWidth="1dp"

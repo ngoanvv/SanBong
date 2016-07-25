@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.sanbong.R;
 import com.sanbong.model.Match;
-import com.sanbong.utils.ShowToask;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * Created by Diep_Chelsea on 13/07/2016.
  */
-public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.RecyclerViewHolder> {
+public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.RecyclerViewHolder>{
 
     ArrayList<Match> list;
     Activity context;
@@ -75,26 +74,27 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShowToask.showToaskLong(context,"Accept this match ?");
+                    matchClickInterface.onClickAcceptMatch();
+
                 }
             });
             readmore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    matchClickInterface.onMatchClick();
+                    matchClickInterface.onClickReadMore();
 
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        matchClickInterface.onMatchClick();
                         Log.d("match click","true");
                 }
             });
         }
 
     }
+
 
     public MatchClickInterface matchClickInterface;
     public void setMatchClickInterface(MatchClickInterface matchClickInterface)
@@ -103,7 +103,7 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
     }
     public interface MatchClickInterface
     {
-
-        public void onMatchClick();
+        public void onClickAcceptMatch();
+        public void onClickReadMore();
     }
 }

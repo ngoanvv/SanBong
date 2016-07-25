@@ -205,6 +205,7 @@
         android:layout_marginTop="40dp"
         >
         <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/bt_contact"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:textColor="@color/coloWhite"
@@ -225,6 +226,7 @@
             fancy:fb_textColor="#FFFFFF"
             />
         <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/bt_accept"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             fancy:fb_borderColor="#FFFFFF"

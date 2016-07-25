@@ -10,21 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.sanbong.R;
 import com.sanbong.adapter.FindMatchAdapter;
+import com.sanbong.dialog.AcceptMatchDialog;
 import com.sanbong.model.Match;
+import com.sanbong.utils.ShowToask;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 
 /**
  * Created by Diep_Chelsea on 13/07/2016.
  */
-public class FindMatchFragment extends Fragment implements FindMatchAdapter.MatchClickInterface {
+public class FindMatchFragment extends Fragment implements FindMatchAdapter.MatchClickInterface , AcceptMatchDialog.onAcceptMatchClick {
     public static final String TAG = "Find match";
     RecyclerView recyclerView;
     ArrayList<Match> listMatches;
-    MaterialSpinner spinner_location,spinner_time;
+    MaterialBetterSpinner spinner_location,spinner_time;
     private ArrayList<String> arrayLocation, arrayTime;
 
     @Override
@@ -38,7 +40,6 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
         adapter.setMatchClickInterface(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
@@ -50,8 +51,8 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     public void initView(View v)
     {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        spinner_location = (MaterialSpinner) v.findViewById(R.id.match_location);
-        spinner_time = (MaterialSpinner) v.findViewById(R.id.match_time);
+        spinner_location = (MaterialBetterSpinner) v.findViewById(R.id.match_location);
+        spinner_time = (MaterialBetterSpinner) v.findViewById(R.id.match_time);
         ArrayAdapter<String> adapterLocation = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayLocation);
         ArrayAdapter<String> adapterTime = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayTime);
 
@@ -89,11 +90,24 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
         Log.d("onActivityCreated","onActivityCreated");
     }
 
+
     @Override
-    public void onMatchClick() {
-        Log.d("match click","received");
+    public void onClickAcceptMatch() {
+            AcceptMatchDialog dialog = new AcceptMatchDialog();
+            dialog.setAcceptMatch(this);
+            dialog.show(getFragmentManager(),TAG);
+    }
+
+    @Override
+    public void onClickReadMore() {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container,new AcceptMatchFragment(),AcceptMatchFragment.TAG).addToBackStack(null).commit();
+                      .replace(R.id.container,new AcceptMatchFragment(),AcceptMatchFragment.TAG).addToBackStack(null).commit();
+                }
+
+
+    @Override
+    public void onAcceptInDialog() {
+        ShowToask.showToaskLong(getContext(),"Bạn đã nhận kèo bóng này");
     }
 }
 

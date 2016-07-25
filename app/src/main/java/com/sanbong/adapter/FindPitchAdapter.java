@@ -41,17 +41,17 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
         holder.tv_contact.setText(list.get(position).getOwnerPhone());
         holder.tv_location.setText(list.get(position).getLocation());
 //        holder.tv_stadium.setText(list.get(position).getStadium());
-//        holder.tv_money.setText(list.get(position).getMoney());
+        holder.tv_money.setText(list.get(position).getMoney());
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tv_name,tv_owner,tv_location,tv_money,tv_contact;
-        FancyButton accept,readmore;
+        FancyButton booknow,readmore;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -61,13 +61,12 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
             tv_location = (TextView) itemView.findViewById(R.id.item_location);
             tv_money = (TextView) itemView.findViewById(R.id.item_money);
             tv_contact = (TextView) itemView.findViewById(R.id.item_contact);
-            accept = (FancyButton) itemView.findViewById(R.id.bt_accept);
+            booknow = (FancyButton) itemView.findViewById(R.id.bt_booknow);
             readmore = (FancyButton) itemView.findViewById(R.id.bt_readmore);
 
-            accept.setOnClickListener(new View.OnClickListener() {
+            booknow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
 
                 }
             });
@@ -80,7 +79,7 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("match click","true");
+                    Log.d("pitch click","true");
                 }
             });
         }
