@@ -20,10 +20,11 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import java.util.ArrayList;
 
 /**
- * Created by Diep_Chelsea on 18/07/2016.
+ * Created by Diep_Chelsea on 26/07/2016.
  */
-public class FindPitchFragment extends Fragment implements FindPitchAdapter.PitchClickInterface , OrderPitchDialog.OrderPitchDialogInterface{
-    public static final String TAG = "Find match";
+public class HotPitchFragment extends Fragment implements FindPitchAdapter.PitchClickInterface ,
+        OrderPitchDialog.OrderPitchDialogInterface {
+ public static final String TAG = "Find match";
     RecyclerView recyclerView;
     ArrayList<Pitch> listPitches;
     MaterialBetterSpinner spinner_location;
@@ -95,8 +96,8 @@ public class FindPitchFragment extends Fragment implements FindPitchAdapter.Pitc
 
     @Override
     public void clickReadmore() {
-         getActivity().getSupportFragmentManager().beginTransaction()
-                 .replace(R.id.container,new PitchDetailFragment(), PitchDetailFragment.TAG).addToBackStack(null).commit();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container,new PitchDetailFragment(), PitchDetailFragment.TAG).addToBackStack(null).commit();
     }
 
     @Override

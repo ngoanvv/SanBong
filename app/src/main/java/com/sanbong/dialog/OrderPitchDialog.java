@@ -6,16 +6,18 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.sanbong.R;
 
-
 /**
- * Created by Diep_Chelsea on 29/06/2016.
+ * Created by Diep_Chelsea on 25/07/2016.
  */
-public class LogOutDialog extends DialogFragment implements View.OnClickListener {
+public class OrderPitchDialog extends DialogFragment implements View.OnClickListener{
+
     public static final String TAG = "DeleteOffer";
     public Button bt_ok,bt_cancel;
+    public TextView title;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Context mContext = getActivity();
@@ -24,9 +26,12 @@ public class LogOutDialog extends DialogFragment implements View.OnClickListener
 
         bt_ok = (Button) view.findViewById(R.id.id_dialog_ok);
         bt_cancel = (Button) view.findViewById(R.id.id_dialog_cancel);
+        title = (TextView) view.findViewById(R.id.title);
 
         bt_ok.setOnClickListener(this);
         bt_cancel.setOnClickListener(this);
+        title.setText(getString(R.string.order_pitch));
+
 
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(view);
@@ -53,18 +58,17 @@ public class LogOutDialog extends DialogFragment implements View.OnClickListener
     }
 
     private void handleOkEvent() {
-        mLogoutInterface.onLogOutEvent();
+        pitchDialogInterface.onOrderClickDialog();
+        dismiss();
     }
-
-    LogoutInterface mLogoutInterface;
-    public void setLogoutInterface(LogoutInterface mLogoutInterface2)
+    public OrderPitchDialogInterface pitchDialogInterface;
+    public void setPitchDialogInterface(OrderPitchDialogInterface orderPitchDialogInterface)
     {
-        mLogoutInterface=mLogoutInterface2;
+        this.pitchDialogInterface = orderPitchDialogInterface;
     }
-    public interface LogoutInterface
+    public interface OrderPitchDialogInterface
     {
-        void onLogOutEvent();
+        void onOrderClickDialog();
 
     }
-
 }

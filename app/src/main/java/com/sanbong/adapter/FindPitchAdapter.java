@@ -36,12 +36,13 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+
         holder.tv_name.setText(list.get(position).getName());
         holder.tv_owner.setText(list.get(position).getOwnerName());
         holder.tv_contact.setText(list.get(position).getOwnerPhone());
         holder.tv_location.setText(list.get(position).getLocation());
-//        holder.tv_stadium.setText(list.get(position).getStadium());
         holder.tv_money.setText(list.get(position).getMoney());
+
     }
 
 
@@ -67,13 +68,13 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
             booknow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mPitchClickInterface.clickOrderNow();
                 }
             });
             readmore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mPitchClickInterface.clickReadmore();
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +84,16 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
                 }
             });
         }
+    }
+    public PitchClickInterface mPitchClickInterface;
 
+    public void setmPitchClickInterface(PitchClickInterface mPitchClickInterface) {
+        this.mPitchClickInterface = mPitchClickInterface;
+    }
+
+    public interface PitchClickInterface
+    {
+        void clickOrderNow();
+        void clickReadmore();
     }
 }

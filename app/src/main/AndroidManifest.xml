@@ -43,8 +43,6 @@
         </activity>
         <activity android:name=".ui.SignUpActivity">
         </activity>
-        <activity android:name=".ui.PitchDetailActivity">
-        </activity>
         <activity android:name=".ui.ForgotPasswordActivity">
         </activity>
     </application>

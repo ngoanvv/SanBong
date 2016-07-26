@@ -12,7 +12,9 @@ import android.widget.ArrayAdapter;
 
 import com.sanbong.R;
 import com.sanbong.adapter.FindMatchAdapter;
+import com.sanbong.adapter.FindPitchAdapter;
 import com.sanbong.dialog.AcceptMatchDialog;
+import com.sanbong.dialog.OrderPitchDialog;
 import com.sanbong.model.Match;
 import com.sanbong.utils.ShowToask;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -22,7 +24,8 @@ import java.util.ArrayList;
 /**
  * Created by Diep_Chelsea on 13/07/2016.
  */
-public class FindMatchFragment extends Fragment implements FindMatchAdapter.MatchClickInterface , AcceptMatchDialog.onAcceptMatchClick {
+public class FindMatchFragment extends Fragment implements FindMatchAdapter.MatchClickInterface ,
+        AcceptMatchDialog.onAcceptMatchClick, FindPitchAdapter.PitchClickInterface {
     public static final String TAG = "Find match";
     RecyclerView recyclerView;
     ArrayList<Match> listMatches;
@@ -33,11 +36,11 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_find_match, container, false);
         initSpinner();
-
         initView(rootView);
 
         FindMatchAdapter adapter = new FindMatchAdapter(getActivity(),initData());
         adapter.setMatchClickInterface(this);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -45,9 +48,7 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
 
         return rootView;
     }
-    public void initLicense()
-    {
-    }
+
     public void initView(View v)
     {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
@@ -108,6 +109,18 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     @Override
     public void onAcceptInDialog() {
         ShowToask.showToaskLong(getContext(),"Bạn đã nhận kèo bóng này");
+    }
+
+    @Override
+    public void clickOrderNow() {
+        OrderPitchDialog dialog = new OrderPitchDialog();
+        dialog.show(getActivity().getSupportFragmentManager(),OrderPitchDialog.TAG);
+    }
+
+    @Override
+    public void clickReadmore() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container,new PitchDetailFragment()).addToBackStack(null).commit();
     }
 }
 

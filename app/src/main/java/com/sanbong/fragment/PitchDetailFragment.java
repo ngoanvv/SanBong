@@ -11,12 +11,12 @@ import com.sanbong.R;
 /**
  * Created by Diep_Chelsea on 13/07/2016.
  */
-public class OrderFragment extends Fragment {
+public class PitchDetailFragment extends Fragment {
     public static final String TAG = "Order";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        return inflater.inflate(R.layout.fragment_pitch, container, false);
     }
 
     @Override

@@ -19,6 +19,7 @@ import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
 import com.sanbong.fragment.FindMatchFragment;
 import com.sanbong.fragment.FindPitchFragment;
+import com.sanbong.fragment.HotPitchFragment;
 import com.sanbong.fragment.MyMapFragment;
 import com.sanbong.model.UserModel;
 import com.sanbong.ui.LoginActivity;
@@ -96,6 +97,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
             case 3: {//San dep gio vang //todo
 
+                getSupportActionBar().setTitle("Sân đẹp giờ vàng");
+                getSupportFragmentManager().popBackStack();
+                fragment = new HotPitchFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, FindMatchFragment.TAG).commit();
                 break;
             }
             case 4: // dang tin tim doi
@@ -139,7 +144,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private void showDialogLogout() {
         LogOutDialog dialog = new LogOutDialog();
         dialog.setLogoutInterface(this);
-        dialog.show(getFragmentManager(),"logout");
+        dialog.show(getSupportFragmentManager(),"logout");
     }
 
     public void logOut()
@@ -194,7 +199,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 {
                     SearchDialog dialog = new SearchDialog();
                     dialog.setmSearchEventInterface(this);
-                    dialog.show(getFragmentManager(),"");
+                    dialog.show(getSupportFragmentManager(),"");
                 }
                 break;
             }
