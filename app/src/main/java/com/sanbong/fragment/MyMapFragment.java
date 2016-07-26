@@ -32,12 +32,12 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FragmentManager fm = getChildFragmentManager();
-        fragment = (SupportMapFragment) fm.findFragmentById(R.id.map_v2);
-        if (fragment == null) {
-            fragment = SupportMapFragment.newInstance();
-            fm.beginTransaction().replace(R.id.map_v2, fragment).commit();
-        }
+        FragmentManager fm = getFragmentManager();
+//        fragment = (MapFragment) fm.findFragmentById(R.id.map_v2);
+//        if (fragment == null) {
+//            fragment = MapFragment.newInstance();
+//            fm.beginTransaction().replace(R.id.map_v2, fragment).commit();
+//        }
     }
     public void addMarker()
     {
@@ -52,7 +52,6 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
     public void onResume() {
         super.onResume();
         if (map == null) {
-            map = fragment.getMap();
         }
     }
     public void moveCamera(LatLng latLng)

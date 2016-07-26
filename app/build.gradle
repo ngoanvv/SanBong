@@ -3,13 +3,21 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
     defaultConfig {
         applicationId "com.sanbong"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
     buildTypes {
         release {
@@ -31,5 +39,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.github.medyo:fancybuttons:1.8.1'
-    compile 'com.google.android.gms:play-services:8.4.0'
+    compile  'com.google.android.gms:play-services-maps:9.2.1'
+    compile 'com.google.firebase:firebase-core:9.2.1'
 }

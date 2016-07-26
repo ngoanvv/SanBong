@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
@@ -41,7 +42,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
     String userType;
-    @Override
+    private GoogleMap googleMap;
+
+            @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -74,9 +77,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 0: //case tim kiem
             {
-                fragment = new MyMapFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
-                break;
+//                fragment = new MyMapFragment();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
+//                break;
 
             }
             case 1: // dat san
