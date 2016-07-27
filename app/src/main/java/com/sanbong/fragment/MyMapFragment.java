@@ -1,8 +1,7 @@
 package com.sanbong.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,9 @@ import android.view.ViewGroup;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -19,25 +20,26 @@ import com.sanbong.R;
 /**
  * Created by poliveira on 11/03/2015.
  */
-public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickListener {
+public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
     public static final String TAG = "stats";
-    private SupportMapFragment fragment;
-    private GoogleMap map;
-
+    GoogleMap map;
+    MapFragment  fragment;
+    MapView mMapView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_map, container, false);
+
+        fragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_v2);
+        fragment.getMapAsync(this);
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
+
         super.onActivityCreated(savedInstanceState);
-        FragmentManager fm = getFragmentManager();
-//        fragment = (MapFragment) fm.findFragmentById(R.id.map_v2);
-//        if (fragment == null) {
-//            fragment = MapFragment.newInstance();
-//            fm.beginTransaction().replace(R.id.map_v2, fragment).commit();
-//        }
     }
     public void addMarker()
     {
@@ -65,5 +67,21 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
 
         }
         return false;
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(0, 0))
+                .title("Marker"));
     }
 }

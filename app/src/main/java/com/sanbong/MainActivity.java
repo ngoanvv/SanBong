@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private static String TAG = "MainActivity";
     Dialog dialog;
     Fragment fragment;
+    android.app.Fragment mapFragment;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
     String userType;
@@ -77,11 +78,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 0: //case tim kiem
             {
-//                fragment = new MyMapFragment();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyMapFragment.TAG).commit();
-//                break;
-
-            }
+                mapFragment = new MyMapFragment();
+                getFragmentManager().beginTransaction().replace(R.id.container,mapFragment, MyMapFragment.TAG).commit();
+                break;            }
             case 1: // dat san
             {//stats
                 getSupportActionBar().setTitle("Đặt sân");
@@ -200,7 +199,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         {
             case R.id.action_search :
             {
-                if(fragment instanceof MyMapFragment)
+                if(mapFragment != null)
                 {
                     SearchDialog dialog = new SearchDialog();
                     dialog.setmSearchEventInterface(this);
@@ -225,12 +224,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void search() {
-        if(fragment!=null)
-            if(fragment instanceof MyMapFragment)
+            if(mapFragment != null)
             {
-                ((MyMapFragment) fragment).addMarker();
+                ((MyMapFragment) mapFragment).addMarker();
             }
-
     }
     public void acceptMatch()
     {
