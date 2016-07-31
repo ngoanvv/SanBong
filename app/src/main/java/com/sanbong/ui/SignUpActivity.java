@@ -221,6 +221,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if(firebaseUser != null)
                             {
 
+
                             }
                         }
 
