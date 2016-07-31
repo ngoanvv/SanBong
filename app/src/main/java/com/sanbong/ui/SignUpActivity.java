@@ -2,12 +2,19 @@ package com.sanbong.ui;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.sanbong.R;
 
 import java.util.ArrayList;
@@ -15,21 +22,45 @@ import java.util.ArrayList;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView bt_signUp,bt_login;
     ArrayList<String> list_userType,list_userAdd;
-
+    static String TAG = "SignUpActivity";
     EditText edt_userName,edt_password,edt_rePassword,edt_userEmail;
     private EditText edt_phone;
-
-
+    FirebaseAuth firebaseAuth;
+    FirebaseAuth.AuthStateListener authListener;
+    FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
         initData();
         initView();
         setListener();
 
 
 
+    }
+
+    public void firebaseLicense()
+    {
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // [START_EXCLUDE]
+                // [END_EXCLUDE]
+            }
+        };
     }
     public void initView()
     {
@@ -75,10 +106,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .progress(true, 0)
                 .show();
 
-//        String name = _nameText.getText().toString();
-//        String email = _emailText.getText().toString();
-//        String password = _passwordText.getText().toString();
+        String name = edt_userName.getText().toString();
+        String email = edt_userEmail.getText().toString();
+        String password = edt_password.getText().toString();
 
+        createAccount(email,password);
         // TODO: Implement your own signup logic here.
 
         new android.os.Handler().postDelayed(
@@ -142,7 +174,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             edt_rePassword.setError(null);
         }
-        if(re_password.equals(password))
+        if(!re_password.equals(password))
         {
             valid=false;
             edt_rePassword.setError(getString(R.string.invalid_repassword));
@@ -169,6 +201,39 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             edt_phone.setError(null);
         }
         return valid;
+    }
+    private void createAccount(String email, String password) {
+        Log.d(TAG, "createAccount:" + email);
+
+        showProgressDialog();
+
+        // [START create_user_with_email]
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        hideProgressDialog();
+                        if(task.isSuccessful())
+                        {
+                            firebaseUser =  task.getResult().getUser();
+                            if(firebaseUser != null)
+                            {
+
+                            }
+                        }
+
+                    }
+                });
+        // [END create_user_with_email]
+    }
+
+    private void showProgressDialog() {
+    }
+    private void    hideProgressDialog()
+    {
+
     }
 
     @Override

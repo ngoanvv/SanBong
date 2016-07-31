@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.sanbong.MainActivity;
 import com.sanbong.R;
 import com.sanbong.model.UserModel;
@@ -20,19 +27,67 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_signUp,bt_login,tv_forgot;
     EditText edt_email,edt_password;
     SharedPreferences sharedPreferences;
-
-
+    AuthCredential credential;
+    FirebaseUser firebaseUser ;
+    FirebaseAuth.AuthStateListener authStateListener;
+    FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        initView();
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_login);
+            initView();
+        auth = FirebaseAuth.getInstance();
+
         sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
-        if(sharedPreferences!=null)
-            flash();
+        if(sharedPreferences!=null)   flash();
+
+
+
+
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authStateListener);
+    }
+    public void loginFirebase(String email, String password)
+    {
 
+        auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("loginFirebase", "signInWithEmail:onComplete:" + task.isSuccessful());
 
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w("loginFirebase", "signInWithEmail:failed", task.getException());
+                        }
+                        else
+                        {
+
+                        }
+                        // ...
+                    }
+                });
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                firebaseUser = firebaseAuth.getCurrentUser();
+                Log.d("email",firebaseUser.getEmail());
+                Log.d("id",firebaseUser.getUid());
+            }
+        };
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authStateListener != null) {
+            auth.removeAuthStateListener(authStateListener);
+        }
+    }
     public void flash()
     {
 
@@ -51,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edt_password.setText(password);
             Log.d("email/password",email+"/"+password);
             login(email,password,userType);
+            loginFirebase(email,password);
         }
 
 

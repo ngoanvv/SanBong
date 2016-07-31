@@ -80,8 +80,5 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
     }
 }

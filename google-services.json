@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "462958953433",
+    "firebase_url": "https://sanbong-1352.firebaseio.com",
+    "project_id": "sanbong-1352",
+    "storage_bucket": "sanbong-1352.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462958953433:android:6af6a61eb8a564e6",
+        "android_client_info": {
+          "package_name": "com.example.diep_chelsea.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462958953433-hs0qee60tpn1kvkdg54a6h4931k1ggqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBo8cMkr2HlcI6xiV4nRCtDPQmaluWCLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462958953433:android:b1db59316f4dd0b8",
+        "android_client_info": {
+          "package_name": "com.sanbong"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462958953433-hs0qee60tpn1kvkdg54a6h4931k1ggqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBo8cMkr2HlcI6xiV4nRCtDPQmaluWCLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
