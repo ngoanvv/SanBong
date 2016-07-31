@@ -36,7 +36,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
             initView();
-        auth = FirebaseAuth.getInstance();
+
+
+//        auth = FirebaseAuth.getInstance();
 
         sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
         if(sharedPreferences!=null)   flash();
@@ -48,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
-        auth.addAuthStateListener(authStateListener);
+//        auth.addAuthStateListener(authStateListener);
     }
     public void loginFirebase(String email, String password)
     {
@@ -106,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edt_password.setText(password);
             Log.d("email/password",email+"/"+password);
             login(email,password,userType);
-            loginFirebase(email,password);
+//            loginFirebase(email,password);
         }
 
 
