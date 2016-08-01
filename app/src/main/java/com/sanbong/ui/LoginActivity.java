@@ -14,10 +14,15 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.sanbong.CONSTANT;
 import com.sanbong.MainActivity;
 import com.sanbong.R;
 import com.sanbong.model.UserModel;
@@ -27,75 +32,98 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_signUp,bt_login,tv_forgot;
     EditText edt_email,edt_password;
     SharedPreferences sharedPreferences;
-    AuthCredential credential;
     FirebaseUser firebaseUser ;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
     FirebaseAuth.AuthStateListener authStateListener;
     FirebaseAuth auth;
+    UserModel userModel;
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login);
-            initView();
-
-
-//        auth = FirebaseAuth.getInstance();
-
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        initView();
+        initDb();
         sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
         if(sharedPreferences!=null)   flash();
 
-
-
-
+    }
+    public void initDb()
+    {
+        database = FirebaseDatabase.getInstance();
     }
     @Override
     public void onStart() {
         super.onStart();
+        auth = FirebaseAuth.getInstance();
 //        auth.addAuthStateListener(authStateListener);
     }
-    public void loginFirebase(String email, String password)
+    public void loginFirebase(String email, final String password)
     {
-
+        auth = FirebaseAuth.getInstance();
         auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("loginFirebase", "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w("loginFirebase", "signInWithEmail:failed", task.getException());
+                            Log.d("loginFirebase", "signInWithEmail:failed", task.getException());
                         }
                         else
                         {
+
+                            Log.d("loginFirebase", "signInWithEmail:isSuccess", task.getException());
+                            firebaseUser = task.getResult().getUser();
+                            // get data from db
+                            databaseReference = database.getReference("users").child(firebaseUser.getUid());
+
+                            userModel = new UserModel();
+                            userModel.setEmail(firebaseUser.getEmail());
+                            userModel.setId(firebaseUser.getUid());
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Log.d("data-json",dataSnapshot.getValue().toString());
+                                    userModel.setImageURL(dataSnapshot.child("imageURL").getValue().toString());
+                                    userModel.setPhone(dataSnapshot.child("phone").getValue().toString());
+                                    userModel.setName(dataSnapshot.child("name").getValue().toString());
+                                    userModel.setUserType(dataSnapshot.child("type").getValue().toString());
+                                    onLoginSuccess(userModel,password);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                        ShowToask.showToaskLong(LoginActivity.this,"Không thể kết nối máy chủ");
+                                }
+                            });
 
                         }
                         // ...
                     }
                 });
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                firebaseUser = firebaseAuth.getCurrentUser();
-                Log.d("email",firebaseUser.getEmail());
-                Log.d("id",firebaseUser.getUid());
-            }
-        };
+//        authStateListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//
+//            }
+//        };
     }
     @Override
     public void onStop() {
         super.onStop();
-        if (authStateListener != null) {
-            auth.removeAuthStateListener(authStateListener);
-        }
+//        if (authStateListener != null) {
+//            auth.removeAuthStateListener(authStateListener);
+//        }
     }
     public void flash()
     {
-
+        dialog = new MaterialDialog.Builder(this)
+                .content("Đang đăng nhập....")
+                .progress(true, 0)
+                .show();
+        auth = FirebaseAuth.getInstance();
         String email = sharedPreferences.getString("email","null");
         String password = sharedPreferences.getString("password", "null");
-        String userType = sharedPreferences.getString("userType", "null");
 
         if(email.equals("null")&& password.equals("null"))
         {
@@ -107,8 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edt_email.setText(email);
             edt_password.setText(password);
             Log.d("email/password",email+"/"+password);
-            login(email,password,userType);
-//            loginFirebase(email,password);
+            loginFirebase(email,password);
         }
 
 
@@ -160,48 +187,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ShowToask.showToaskLong(LoginActivity.this,getString(R.string.login)+" "+getString(R.string.failed));
 
     }
-    public void login(String email,String password,String userType) {
-
-        if (!validate(email,password)) {
-            onLoginFailed();
-            return;
-        }
 
 
-        final Dialog dialog =  new MaterialDialog.Builder(this)
-                .content("Đang đăng nhập....")
-                .progress(true, 0)
-                .show();
-
-        if(email.equals("team@gmail.com")&&password.equals("1"))
-            new android.os.Handler().postDelayed(
-                    new Runnable() {
-                        public void run() {
-                            // On complete call either onLoginSuccess or onLoginFailed
-                            onLoginSuccess(UserModel.TYPE_TEAM);
-                            // onLoginFailed();
-                            dialog.dismiss();
-                        }
-                    }, 3000);
-        if(email.equals("owner@gmail.com")&&password.equals("1"))
-            new android.os.Handler().postDelayed(
-                    new Runnable() {
-                        public void run() {
-                            // On complete call either onLoginSuccess or onLoginFailed
-                            onLoginSuccess(UserModel.TYPE_OWNER);
-                            // onLoginFailed();
-                            dialog.dismiss();
-                        }
-                    }, 3000);
-    }
-
-    private void onLoginSuccess(String userType)
+    private void onLoginSuccess(UserModel userModel,String password)
     {
-        String email = edt_email.getText().toString();
-        String password = edt_password.getText().toString();
-        saveUserData(email,password,userType);
+        dialog.dismiss();
+        saveUserData(userModel.getEmail(),password,userModel.getUserType());
         Intent intent= new Intent(LoginActivity.this,MainActivity.class);
-        intent.putExtra("userType",userType);
+        intent.putExtra(CONSTANT.USER_TYPE,userModel.getUserType());
+        intent.putExtra(CONSTANT.KEY_USER,userModel);
         startActivity(intent);
         finish();
     }
@@ -219,12 +213,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             case R.id.btn_login :
             {
-                if(edt_email.getText().toString().contains("team"))
-                    login(edt_email.getText().toString(),edt_password.getText().toString(),UserModel.TYPE_TEAM);
-                else
-                    login(edt_email.getText().toString(),edt_password.getText().toString(),UserModel.TYPE_OWNER);
 
-                break;
+                if (!validate(edt_email.getText().toString(),edt_password.getText().toString())) {
+                        onLoginFailed();
+                        break;
+                }
+                else {
+
+                    dialog = new MaterialDialog.Builder(this)
+                            .content("Đang đăng nhập....")
+                            .progress(true, 0)
+                            .show();
+                    loginFirebase(edt_email.getText().toString(), edt_password.getText().toString());
+                    break;
+                }
             }
             case R.id.link_forgot :
             {

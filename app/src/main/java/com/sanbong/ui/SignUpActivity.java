@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,7 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sanbong.R;
+import com.sanbong.model.UserModel;
 
 import java.util.ArrayList;
 
@@ -24,26 +27,29 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<String> list_userType,list_userAdd;
     static String TAG = "SignUpActivity";
     EditText edt_userName,edt_password,edt_rePassword,edt_userEmail;
-    private EditText edt_phone;
+    EditText edt_phone;
     FirebaseAuth firebaseAuth;
     FirebaseAuth.AuthStateListener authListener;
     FirebaseUser firebaseUser;
+    FirebaseDatabase firebaseDatabase;
+    RadioGroup groupUsertype;
+    String userType=UserModel.TYPE_TEAM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
+        initDb();
         initData();
         initView();
         setListener();
 
-
-
     }
-
+    public void initDb()
+    {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+    }
     public void firebaseLicense()
     {
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -64,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
     public void initView()
     {
+        groupUsertype = (RadioGroup) findViewById(R.id.radio_userType);
         edt_userName = (EditText) findViewById(R.id.input_name);
         edt_password = (EditText) findViewById(R.id.input_password);
         edt_rePassword = (EditText) findViewById(R.id.input_re_password);
@@ -78,6 +85,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     {
         bt_login.setOnClickListener(this);
         bt_signUp.setOnClickListener(this);
+        groupUsertype.check(R.id.radio_team);
+        groupUsertype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if(checkedId==R.id.radio_owner)
+                    {
+                        userType = UserModel.TYPE_OWNER;
+
+                    }
+                    if(checkedId==R.id.radio_team)
+                    {
+                        userType = UserModel.TYPE_TEAM;
+                    }
+
+            }
+        });
     }
 
     public void initData()

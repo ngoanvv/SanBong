@@ -103,12 +103,14 @@
             android:layout_height="wrap_content">
 
         <RadioGroup
+            android:id="@+id/radio_userType"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_height="wrap_content">
 
             <RadioButton
+                android:id="@+id/radio_owner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/myAccentColor"
@@ -117,11 +119,13 @@
                 android:layout_gravity="right"
                 />
             <RadioButton
+                android:id="@+id/radio_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/myAccentColor"
                 android:layout_marginLeft="20dp"
                 android:text="@string/khachang"
+                android:checked="true"
                 android:layout_gravity="left"/>
         </RadioGroup>
         </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
@@ -44,17 +45,24 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private Toolbar mToolbar;
     String userType;
     private GoogleMap googleMap;
-
+    private UserModel userModel;
             @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userType=getIntent().getStringExtra("userType");
+        getUserModel();
         initDrawer();
         initView();
     }
 
-
+    public void getUserModel()
+    {
+        userModel = (UserModel) getIntent().getSerializableExtra(CONSTANT.KEY_USER);
+        if(userModel !=null)
+        {
+            userType = userModel.getUserType();
+        }
+    }
     public void initDrawer() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -64,7 +72,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         getSupportActionBar().setTitle("Tìm sân bóng");
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
-        mNavigationDrawerFragment.setUserData("Diep NV, UET", "Email : diep170995@gmail.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
+        mNavigationDrawerFragment.setUserData(userModel.getName(),userModel.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
 
     }
 
