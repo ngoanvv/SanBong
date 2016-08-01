@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
@@ -46,10 +48,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     String userType;
     private GoogleMap googleMap;
     private UserModel userModel;
+
+    FirebaseAuth auth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
             @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        demo();
         getUserModel();
         initDrawer();
         initView();
@@ -79,7 +87,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void initView() {
 
     }
+    public void demo()
+    {
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("demo2");
+        reference.child("hic").child("heelo").setValue("hello");
 
+    }
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 

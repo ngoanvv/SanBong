@@ -1,8 +1,10 @@
 package com.sanbong.ui;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,9 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sanbong.R;
 import com.sanbong.model.UserModel;
+import com.sanbong.utils.ShowToask;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     FirebaseDatabase firebaseDatabase;
     RadioGroup groupUsertype;
     String userType=UserModel.TYPE_TEAM;
+    DatabaseReference reference;
+    UserModel userModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +48,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         firebaseAuth = FirebaseAuth.getInstance();
         initDb();
-        initData();
         initView();
         setListener();
 
     }
+
     public void initDb()
     {
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -92,28 +99,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     if(checkedId==R.id.radio_owner)
                     {
                         userType = UserModel.TYPE_OWNER;
-
+                        Log.d("owner","click");
                     }
                     if(checkedId==R.id.radio_team)
                     {
                         userType = UserModel.TYPE_TEAM;
+                        Log.d("team","click");
                     }
-
             }
         });
     }
-
-    public void initData()
+    public void insertDatabase(UserModel userModel)
     {
-        list_userAdd = new ArrayList<>();
-        list_userType = new ArrayList<>();
-
-        list_userAdd.add("Đông Anh");
-        list_userAdd.add("Sóc Sơn");
-        list_userAdd.add("Hà Nội");
-
-        list_userType.add("Chủ sân");
-        list_userType.add("Khách hàng");
+            firebaseAuth = FirebaseAuth.getInstance();
+            reference = firebaseDatabase.getReference("users");
+            reference= reference.child(userModel.getId()).getRef();
+            reference.child("name").setValue(userModel.getName());
+            reference.child("type").setValue(userModel.getUserType());
+            reference.child("phone").setValue(userModel.getPhone());
+            reference.child("imageURL").setValue(userModel.getImageURL());
+            reference.child("password").setValue(userModel.getPassword());
 
     }
     public void signup() {
@@ -132,9 +137,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String name = edt_userName.getText().toString();
         String email = edt_userEmail.getText().toString();
         String password = edt_password.getText().toString();
+        String phone = edt_phone.getText().toString();
 
-        createAccount(email,password);
-        // TODO: Implement your own signup logic here.
+        createAccount(email,password,name,phone,userType);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -225,34 +230,66 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         return valid;
     }
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-
+    private void createAccount(final String email, final String password,final  String name, final String phone, final String userType) {
         showProgressDialog();
-
         // [START create_user_with_email]
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
                         hideProgressDialog();
+                        //nếu tạo user thành công
                         if(task.isSuccessful())
                         {
-                            firebaseUser =  task.getResult().getUser();
-                            if(firebaseUser != null)
-                            {
-
-
-                            }
+                            loginFirebase(email,password,name,phone,userType);
                         }
-
+                        else
+                        {
+                            ShowToask.showToaskLong(SignUpActivity.this,task.isSuccessful()+" ");
+                        }
                     }
                 });
         // [END create_user_with_email]
     }
-
+    public void loginFirebase(String email, final String password, final String name, final String phone, final String userType)
+    {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.d("loginFirebase", "signInWithEmail:failed", task.getException());
+                            AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                            builder.setMessage("Không thể tạo tài khoản, vui lòng thử lại sau");
+                            builder.setCancelable(true);
+                            builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.create().show();
+                        }
+                        else
+                        {
+                            Log.d("loginFirebase", "signInWithEmail:isSuccess", task.getException());
+                            firebaseUser = task.getResult().getUser();
+                            // get data from db
+                            userModel = new UserModel();
+                            userModel.setEmail(firebaseUser.getEmail());
+                            userModel.setId(firebaseUser.getUid());
+                            userModel.setPassword(password);
+                            userModel.setUserType(userType);
+                            userModel.setPhone(phone);
+                            userModel.setName(name);
+                            userModel.setImageURL("image");
+                            insertDatabase(userModel);
+                        }
+                        // ...
+                    }
+                });
+    }
     private void showProgressDialog() {
     }
     private void    hideProgressDialog()

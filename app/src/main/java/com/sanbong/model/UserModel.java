@@ -14,6 +14,15 @@ public class UserModel implements Serializable {
     public String email;
     public String userType;
     public String imageURL;
+    public String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getImageURL() {
         return imageURL;

@@ -1,10 +1,12 @@
 package com.sanbong.ui;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -53,13 +55,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         database = FirebaseDatabase.getInstance();
     }
+
+    public void demo()
+    {
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("demo2");
+        databaseReference.child("heelo").setValue("hello");
+
+    }
     @Override
     public void onStart() {
         super.onStart();
         auth = FirebaseAuth.getInstance();
 //        auth.addAuthStateListener(authStateListener);
     }
-    public void loginFirebase(String email, final String password)
+    public void loginFirebase(final String email, final String password)
     {
         auth = FirebaseAuth.getInstance();
         auth.signInWithEmailAndPassword(email,password)
@@ -76,7 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             firebaseUser = task.getResult().getUser();
                             // get data from db
                             databaseReference = database.getReference("users").child(firebaseUser.getUid());
-
                             userModel = new UserModel();
                             userModel.setEmail(firebaseUser.getEmail());
                             userModel.setId(firebaseUser.getUid());
@@ -88,12 +98,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     userModel.setPhone(dataSnapshot.child("phone").getValue().toString());
                                     userModel.setName(dataSnapshot.child("name").getValue().toString());
                                     userModel.setUserType(dataSnapshot.child("type").getValue().toString());
+                                    userModel.setPassword(password);
                                     onLoginSuccess(userModel,password);
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-                                        ShowToask.showToaskLong(LoginActivity.this,"Không thể kết nối máy chủ");
+
+                                    dialog.dismiss();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                    builder.setMessage("Không thể tạo tài khoản, vui lòng thử lại sau");
+                                    builder.setCancelable(true);
+                                    builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    builder.create().show();
                                 }
                             });
 
@@ -101,12 +123,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // ...
                     }
                 });
-//        authStateListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//
-//            }
-//        };
     }
     @Override
     public void onStop() {
@@ -117,10 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     public void flash()
     {
-        dialog = new MaterialDialog.Builder(this)
-                .content("Đang đăng nhập....")
-                .progress(true, 0)
-                .show();
+
         auth = FirebaseAuth.getInstance();
         String email = sharedPreferences.getString("email","null");
         String password = sharedPreferences.getString("password", "null");
@@ -132,6 +145,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         else
         {
+            dialog = new MaterialDialog.Builder(this)
+                    .content("Đang đăng nhập....")
+                    .progress(true, 0)
+                    .show();
             edt_email.setText(email);
             edt_password.setText(password);
             Log.d("email/password",email+"/"+password);

@@ -54,6 +54,8 @@
                       android:layout_height="wrap_content"
                       android:text="123456"
                       android:inputType="textPassword"
+                      android:textColor="@color/myAccentColor"
+                      android:shadowColor="@color/myAccentColor"
                       android:hint="Password"/>
         </android.support.design.widget.TextInputLayout>
 
