@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.sanbong.R;
 import com.sanbong.adapter.FindPitchAdapter;
@@ -32,8 +31,6 @@ public class FindPitchFragment extends Fragment implements FindPitchAdapter.Pitc
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_find_pitch, container, false);
-
-        initSpinner();
         initView(rootView);
 
         FindPitchAdapter adapter = new FindPitchAdapter(getActivity(),initData());
@@ -50,21 +47,6 @@ public class FindPitchFragment extends Fragment implements FindPitchAdapter.Pitc
     public void initView(View v)
     {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        spinner_location = (MaterialBetterSpinner) v.findViewById(R.id.match_location);
-        ArrayAdapter<String> adapterLocation = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayLocation);
-
-        spinner_location.setAdapter(adapterLocation);
-
-
-    }
-    public void initSpinner()
-    {
-        arrayLocation = new ArrayList<String>();
-        arrayLocation.add("Quận số 1");
-        arrayLocation.add("Quận số 2");
-        arrayLocation.add("Quận số 3");
-        arrayLocation.add("Quận số 4");
-        arrayLocation.add("Quận số 5");
 
     }
     public ArrayList<Pitch> initData()

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +49,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     String userType;
     private GoogleMap googleMap;
     private UserModel userModel;
-
+    FrameLayout container,container_map;
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -58,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         demo();
-        getUserModel();
+//        getUserModel();
         initDrawer();
         initView();
     }
@@ -80,12 +81,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         getSupportActionBar().setTitle("Tìm sân bóng");
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
-        mNavigationDrawerFragment.setUserData(userModel.getName(),userModel.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
+        mNavigationDrawerFragment.setUserData("sadasd","adasd", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
 
     }
 
     public void initView() {
-
+        container = (FrameLayout) findViewById(R.id.container);
+        container_map = (FrameLayout) findViewById(R.id.container_map);
     }
     public void demo()
     {
@@ -101,11 +103,23 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 0: //case tim kiem
             {
-                mapFragment = new MyMapFragment();
-                getFragmentManager().beginTransaction().replace(R.id.container,mapFragment, MyMapFragment.TAG).commit();
-                break;            }
+                if(mapFragment!= null ) {
+                    container.setVisibility(View.GONE);
+                    container_map.setVisibility(View.VISIBLE);
+                    break;
+                }
+                else {
+
+                    mapFragment = new MyMapFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.container_map, mapFragment, MyMapFragment.TAG).commit();
+                    break;
+                }
+            }
             case 1: // dat san
             {//stats
+                container_map.setVisibility(View.GONE);
+                container.setVisibility(View.VISIBLE);
+
                 getSupportActionBar().setTitle("Đặt sân");
                 getSupportFragmentManager().popBackStack();
                 fragment = new FindPitchFragment();
@@ -114,6 +128,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
             case 2: //tim doi thu //todo
             {
+                container_map.setVisibility(View.GONE);
+                container.setVisibility(View.VISIBLE);
+
                 getSupportActionBar().setTitle("Kèo bóng");
                 getSupportFragmentManager().popBackStack();
                 fragment = new FindMatchFragment();
@@ -122,7 +139,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
             case 3: {//San dep gio vang //todo
 
-
+                container_map.setVisibility(View.GONE);
+                container.setVisibility(View.VISIBLE);
                 getSupportActionBar().setTitle("Sân đẹp giờ vàng");
                 getSupportFragmentManager().popBackStack();
                 fragment = new HotPitchFragment();
@@ -205,9 +223,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
             return true;
         }

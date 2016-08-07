@@ -28,9 +28,15 @@
 
         </LinearLayout>
         <FrameLayout
+            android:id="@+id/container_map"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_height="match_parent"/>
+        <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:clickable="true"
+            android:visibility="gone"
             android:layout_height="match_parent"/>
 
     </LinearLayout>

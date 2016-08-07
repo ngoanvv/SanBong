@@ -2,6 +2,8 @@ package com.sanbong.ui;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sanbong.CONSTANT;
+import com.sanbong.MainActivity;
 import com.sanbong.R;
 import com.sanbong.model.UserModel;
 import com.sanbong.utils.ShowToask;
@@ -40,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     String userType=UserModel.TYPE_TEAM;
     DatabaseReference reference;
     UserModel userModel;
+    private Dialog dialog;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -253,6 +259,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
     public void loginFirebase(String email, final String password, final String name, final String phone, final String userType)
     {
+        dialog.setTitle("Đang đăng nhập");
+        dialog.show();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -285,12 +293,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             userModel.setName(name);
                             userModel.setImageURL("image");
                             insertDatabase(userModel);
+                            onLoginSuccess(userModel,password);
                         }
                         // ...
                     }
                 });
     }
     private void showProgressDialog() {
+    }
+    private void onLoginSuccess(UserModel userModel,String password)
+    {
+        dialog.dismiss();
+        saveUserData(userModel.getEmail(),password,userModel.getUserType());
+        Intent intent= new Intent(SignUpActivity.this,MainActivity.class);
+        intent.putExtra(CONSTANT.USER_TYPE,userModel.getUserType());
+        intent.putExtra(CONSTANT.KEY_USER,userModel);
+        startActivity(intent);
+        finish();
+    }
+    public void saveUserData(String email,String password,String userType)
+    {
+        sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email",email);
+        editor.putString("password",password);
+        editor.putString("userType",userType);
+        Log.d("info",email+"/"+password+"/"+userType);
+        editor.commit();
+
     }
     private void    hideProgressDialog()
     {
