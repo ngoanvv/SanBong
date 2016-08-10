@@ -6,5 +6,4 @@ package com.sanbong;
 public class CONSTANT {
     public static String KEY_USER = "userModel";
     public static String USER_TYPE = "usertype";
-
 }

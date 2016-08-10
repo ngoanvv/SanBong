@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,14 +21,16 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * Created by Diep_Chelsea on 13/07/2016.
  */
-public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.RecyclerViewHolder>{
-
-    ArrayList<Match> list;
-    Activity context;
+public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.RecyclerViewHolder> implements Filterable{
+    public static String TAG="FindMacthAdapter";
+    public ArrayList<Match> list;
+    public Activity context;
     public FindMatchAdapter(Activity context,ArrayList<Match> listData) {
         this.context = context;
         this.list = listData;
     }
+    ArrayList<Match> results;
+
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -52,7 +56,64 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
         return list.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
 
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                list = (ArrayList<Match>) results.values;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+                ArrayList<Match> filteredArray = getFilteredResults(constraint);
+                results.count = filteredArray.size();
+                results.values = filteredArray;
+                return results;
+            }
+        };
+
+        return filter;
+    }
+
+    private ArrayList<Match> getFilteredResults(CharSequence constraint) {
+        Log.d(TAG,"constraint "+constraint.toString());
+        Log.d(TAG,"list "+list.size());
+
+        int count=0;
+        results = new ArrayList<>();
+        constraint=constraint.toString().toLowerCase();
+        for(int i =0;i<list.size();i++)
+        {
+            if(list.get(i).getLocation().toLowerCase().contains(constraint) || list.get(i).getStadium().toLowerCase().contains(constraint)
+              ||      list.get(i).getHostName().toLowerCase().contains(constraint) ||list.get(i).getDescription().toLowerCase().contains(constraint) ||
+            list.get(i).getMoney().toLowerCase().contains(constraint) || list.get(i).getTime().toLowerCase().contains(constraint)
+                    )
+            {
+                results.add(list.get(i));
+                count++;
+            }
+        }
+        Log.d(TAG,"count "+count);
+        Log.d(TAG,"result size: "+results.size());
+        return results;
+    }
+    public void initList()
+    {
+        list = new ArrayList<>();
+        list.add(new Match("1","18h ngày 11-7","Chelsea FC","FECON  Stadium","Đá giao lưu nhẹ nhàng, mong gặp đối thủ lâu dài thường xuyên, liên hệ số 0998989898","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+        list.add(new Match("1","18h ngày 12-7","MU FC","Old Traford Stadium","Đá giao lưu","144 Hồ tùng mậu , Cầu Giấy sdadasdasdsadasdsadasdasdasdasd","100k chia đôi"));
+        list.add(new Match("1","18h ngày 13-7","MC FC","ETIHAD Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+        list.add(new Match("1","18h ngày 14-7","Arsenal FC","Emirates Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+        list.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy, Hà Nội","100k chia đôi"));
+
+    }
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tv_hostname,tv_time,tv_location,tv_stadium,tv_money,tv_descrip;
         LinearLayout ll_match;

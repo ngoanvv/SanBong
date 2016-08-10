@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.sanbong.dialog.CloseDialog;
 import com.sanbong.dialog.LogOutDialog;
 import com.sanbong.dialog.SearchDialog;
+import com.sanbong.fragment.CreateMatchFragment;
 import com.sanbong.fragment.FindMatchFragment;
 import com.sanbong.fragment.FindPitchFragment;
 import com.sanbong.fragment.HotPitchFragment;
@@ -43,7 +44,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private static String TAG = "MainActivity";
     Dialog dialog;
     Fragment fragment;
-    android.app.Fragment mapFragment;
+    MyMapFragment mapFragment;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
     String userType;
@@ -58,8 +59,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        demo();
-//        getUserModel();
+        getUserModel();
         initDrawer();
         initView();
     }
@@ -89,14 +89,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         container = (FrameLayout) findViewById(R.id.container);
         container_map = (FrameLayout) findViewById(R.id.container_map);
     }
-    public void demo()
-    {
-        auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("demo2");
-        reference.child("hic").child("heelo").setValue("hello");
-
-    }
+//    public void demo()
+//    {
+//        auth = FirebaseAuth.getInstance();
+//        database = FirebaseDatabase.getInstance();
+//        reference = database.getReference("demo2");
+//        reference.child("hic").child("heelo").setValue("hello");
+//
+//    }
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 
@@ -150,9 +150,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
             case 4: // dang tin tim doi
             {
+                container_map.setVisibility(View.GONE);
+                container.setVisibility(View.VISIBLE);
 
-                break;
-            }
+                getSupportActionBar().setTitle("Đăng tin tìm đối");
+                getSupportFragmentManager().popBackStack();
+                fragment = new CreateMatchFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, FindMatchFragment.TAG).commit();
+                break;            }
             case 5: // cai dat cua team, them san cua owner
             {
 

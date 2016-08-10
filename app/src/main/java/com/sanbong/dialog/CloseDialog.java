@@ -17,7 +17,7 @@ import com.sanbong.R;
 public class CloseDialog extends DialogFragment implements View.OnClickListener {
     public static final String TAG = "DeleteOffer";
     public Button bt_ok,bt_cancel;
-    TextView title;
+    private TextView title;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

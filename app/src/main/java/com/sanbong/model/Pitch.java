@@ -4,16 +4,16 @@ package com.sanbong.model;
  * Created by Diep_Chelsea on 20/07/2016.
  */
 public class Pitch {
-    String id;
-    String ownerId;
-    String money;
-    String money2;
-    String money3;
+    private  String id;
+    private  String ownerId;
+    private  String money;
+    private  String money2;
+    private  String money3;
 
-    String name;
-    String location;
-    String ownerName;
-    String ownerPhone;
+    private  String name;
+    private  String location;
+    private  String ownerName;
+    private  String ownerPhone;
 
     public Pitch(String id, String ownerId, String money, String name, String location, String ownerName, String ownerPhone) {
         this.id = id;

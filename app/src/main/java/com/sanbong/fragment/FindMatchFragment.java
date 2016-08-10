@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sanbong.R;
 import com.sanbong.adapter.FindMatchAdapter;
 import com.sanbong.adapter.FindPitchAdapter;
@@ -27,18 +31,20 @@ import java.util.ArrayList;
 public class FindMatchFragment extends Fragment implements FindMatchAdapter.MatchClickInterface ,
         AcceptMatchDialog.onAcceptMatchClick, FindPitchAdapter.PitchClickInterface {
     public static final String TAG = "Find match";
-    RecyclerView recyclerView;
-    ArrayList<Match> listMatches;
-    MaterialBetterSpinner spinner_location,spinner_time;
+    private RecyclerView recyclerView;
+    private ArrayList<Match> listMatches;
+    private MaterialBetterSpinner spinner_location,spinner_time;
     private ArrayList<String> arrayLocation, arrayTime;
-
+    private EditText edt_input_search;
+    private FindMatchAdapter adapter;
+    private DatabaseReference mDatabase;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_find_match, container, false);
-        initSpinner();
+//        initSpinner();
         initView(rootView);
 
-        FindMatchAdapter adapter = new FindMatchAdapter(getActivity(),initData());
+        adapter = new FindMatchAdapter(getActivity(),initData());
         adapter.setMatchClickInterface(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -52,13 +58,32 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     public void initView(View v)
     {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        spinner_location = (MaterialBetterSpinner) v.findViewById(R.id.match_location);
-        spinner_time = (MaterialBetterSpinner) v.findViewById(R.id.match_time);
-        ArrayAdapter<String> adapterLocation = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayLocation);
-        ArrayAdapter<String> adapterTime = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayTime);
+        edt_input_search = (EditText) v.findViewById(R.id.edt_input);
+        edt_input_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        spinner_time.setAdapter(adapterTime);
-        spinner_location.setAdapter(adapterLocation);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    adapter.initList();
+                    adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+//        spinner_location = (MaterialBetterSpinner) v.findViewById(R.id.match_location);
+//        spinner_time = (MaterialBetterSpinner) v.findViewById(R.id.match_time);
+//        ArrayAdapter<String> adapterLocation = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayLocation);
+//        ArrayAdapter<String> adapterTime = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayTime);
+//
+//        spinner_time.setAdapter(adapterTime);
+//        spinner_location.setAdapter(adapterLocation);
 
 
     }
@@ -78,11 +103,13 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
     public ArrayList<Match> initData()
     {
         listMatches = new ArrayList<>();
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu nhẹ nhàng, mong gặp đối thủ lâu dài thường xuyên, liên hệ số 0998989898","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy, Hà Nội","100k chia đôi"));
+//        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","FECON  Stadium","Đá giao lưu nhẹ nhàng, mong gặp đối thủ lâu dài thường xuyên, liên hệ số 0998989898","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+//        listMatches.add(new Match("1","18h ngày 12-7","MU FC","Old Traford Stadium","Đá giao lưu","144 Hồ tùng mậu , Cầu Giấy","100k chia đôi"));
+//        listMatches.add(new Match("1","18h ngày 13-7","MC FC","ETIHAD Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+//        listMatches.add(new Match("1","18h ngày 14-7","Arsenal FC","Emirates Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
+//        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy, Hà Nội","100k chia đôi"));
+
+
         return listMatches;
     }
     @Override

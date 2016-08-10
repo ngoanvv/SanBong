@@ -8,12 +8,20 @@
         <item name="colorAccent">@color/myAccentColor</item>
         <item name="android:textColorPrimary">@color/myTextPrimaryColor</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
-
-        <item name="android:windowBackground">@color/myWindowBackground</item>
+        <item name="android:windowBackground">@color/colorTransparent</item>
     </style>
-    <style name="MyButton" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/blueGray</item>
+    <style name="transparent_bottom_line" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/colorTransparent</item>
+        <item name="colorControlActivated">@color/colorTransparent</item>
+        <item name="colorControlHighlight">@color/colorTransparent</item>
+    </style>
+
+    <style name="RaiseButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/lightGreen</item>
+        <item name="android:windowBackground">@color/myAccentColor</item>
+        <item name="android:background">@color/myAccentColor</item>
+        <item name="android:textColor">@color/lightGreen</item>
+
     </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>

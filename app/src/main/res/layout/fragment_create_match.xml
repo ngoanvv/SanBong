@@ -1,8 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="100dp"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        >
+    <!--money-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_height="50dp">
+        <com.sanbong.custom_view.RoundedImageView
+            android:layout_width="25dp"
+            android:background="@drawable/ic_money"
+            android:layout_gravity="center_vertical"
+            android:layout_height="25dp"/>
+        <EditText
+            android:id="@+id/item_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/accent_material_light"
+            android:hint="Chi phí cho trận đấu ?"
+            android:nextFocusDown="@id/item_time"
+            android:textColorHint="@color/blueGray"
 
+            />
+    </LinearLayout>
+    <!--time-->
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <com.sanbong.custom_view.RoundedImageView
+            android:layout_width="25dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_clock"
+            android:layout_height="25dp"/>
+        <EditText
+            android:id="@+id/item_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/accent_material_light"
+            android:hint="Thời gian diễn ra trận đấu ?"
+            android:textColorHint="@color/blueGray"
+            android:nextFocusDown="@id/item_stadium"
+            />
 
-</LinearLayout>
+            />
+    </LinearLayout>
+    <!--//stadium-->
+    <LinearLayout
+        android:layout_marginLeft="25dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <com.sanbong.custom_view.RoundedImageView
+            android:layout_width="25dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_stadium"
+            android:layout_height="25dp"/>
+        <EditText
+            android:id="@+id/item_stadium"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/accent_material_light"
+            android:hint="Tên sân bóng ?"
+            android:nextFocusDown="@id/item_time"
+            android:textColorHint="@color/blueGray" />
+    </LinearLayout>
+    <!--location-->
+    <LinearLayout
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <com.sanbong.custom_view.RoundedImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="25dp"
+            android:background="@drawable/ic_location"
+            android:layout_height="25dp"/>
+        <EditText
+            android:id="@+id/item_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:textSize="18sp"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center_vertical"
+            android:inputType="textMultiLine"
+            android:textColor="@color/accent_material_light"
+            android:hint="Thời gian diễn ra trận đấu ?"
+            android:textColorHint="@color/blueGray" />
+         </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+            <com.sanbong.custom_view.RoundedImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="25dp"
+                android:background="@drawable/ic_note"
+                android:layout_height="25dp"/>
+            <EditText
+                android:id="@+id/item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:textSize="18sp"
+                android:layout_marginLeft="25dp"
+                android:layout_gravity="center_vertical"
+                android:inputType="textMultiLine"
+                android:focusableInTouchMode="false"
+                android:textColor="@color/accent_material_light"
+                android:hint="Miêu tả về trận đấu này"
+                android:textColorHint="@color/blueGray" />
+        </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            >
+            <Button
+            android:id="@+id/bt_create"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
+            android:text="Đăng bài"
+            android:theme="@style/RaiseButton"
+            />
+            <Button
+                android:id="@+id/bt_cancel"
+                android:layout_width="@dimen/margin_100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:text="Quay lại"
+                android:theme="@style/RaiseButton"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

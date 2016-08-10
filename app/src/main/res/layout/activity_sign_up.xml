@@ -39,7 +39,7 @@
                       android:layout_height="wrap_content"
                       android:textColorHint="@color/myAccentColor"
                       android:inputType="textCapWords"
-                      android:hint="Name" />
+                      android:hint="Tên người dùng" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                       android:textColorHint="@color/myAccentColor"
                       android:inputType="number"
                       android:maxLength="11"
-                      android:hint="Phone" />
+                      android:hint="Số điện thoại liên lạc" />
         </android.support.design.widget.TextInputLayout>
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
@@ -82,7 +82,7 @@
                       android:textColor="@color/myAccentColor"
                       android:layout_height="wrap_content"
                       android:inputType="textPassword"
-                      android:hint="Password"/>
+                      android:hint="Mật khẩu"/>
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                       android:layout_height="wrap_content"
                       android:textColorHint="@color/myAccentColor"
                       android:inputType="textPassword"
-                      android:hint="Re-Password"/>
+                      android:hint="Nhập lại mật khẩu"/>
         </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:orientation="vertical"

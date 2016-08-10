@@ -26,6 +26,7 @@
 
     <string name="chusan">Chủ sân</string>
     <string name="khachang">Đội bóng</string>
+    <string name="edt_input_search">Nhập vào bất kỳ bạn muốn tìm</string>
 
 
     <string name="signup">Đăng ký</string>
@@ -38,7 +39,10 @@
     <string name="txt_yes">Tìm kiếm</string>
     <string name="txt_no">Hủy</string>
     <string name="ok">Đồng ý</string>
-    <string name="failed">thất bại</string>
+    <string name="failed">Thất bại</string>
+
+    <string name="invalid_length">Độ dài cần lớn hơn 6 ký tự để đảm bảo không có quá ít thông tin</string>
+
 
     <string name="chon_diadiem">Chọn khu vực</string>
     <string name="chon_loaisan">Chọn loại sân</string>

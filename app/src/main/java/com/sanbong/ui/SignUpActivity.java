@@ -31,19 +31,19 @@ import com.sanbong.utils.ShowToask;
 import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView bt_signUp,bt_login;
-    ArrayList<String> list_userType,list_userAdd;
-    static String TAG = "SignUpActivity";
-    EditText edt_userName,edt_password,edt_rePassword,edt_userEmail;
-    EditText edt_phone;
-    FirebaseAuth firebaseAuth;
-    FirebaseAuth.AuthStateListener authListener;
-    FirebaseUser firebaseUser;
-    FirebaseDatabase firebaseDatabase;
-    RadioGroup groupUsertype;
-    String userType=UserModel.TYPE_TEAM;
-    DatabaseReference reference;
-    UserModel userModel;
+    private TextView bt_signUp,bt_login;
+    private ArrayList<String> list_userType,list_userAdd;
+    public   static String TAG = "SignUpActivity";
+    private EditText edt_userName,edt_password,edt_rePassword,edt_userEmail;
+    private  EditText edt_phone;
+    private  FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authListener;
+    private  FirebaseUser firebaseUser;
+    private  FirebaseDatabase firebaseDatabase;
+    private  RadioGroup groupUsertype;
+    private String userType=UserModel.TYPE_TEAM;
+    private DatabaseReference reference;
+    private UserModel userModel;
     private Dialog dialog;
     private SharedPreferences sharedPreferences;
 
@@ -285,12 +285,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             firebaseUser = task.getResult().getUser();
                             // get data from db
                             userModel = new UserModel();
-                            userModel.setEmail(firebaseUser.getEmail());
-                            userModel.setId(firebaseUser.getUid());
-                            userModel.setPassword(password);
-                            userModel.setUserType(userType);
-                            userModel.setPhone(phone);
-                            userModel.setName(name);
+                            userModel.setEmail(firebaseUser.getEmail().replaceAll("\\s+", " "));
+                            userModel.setId(firebaseUser.getUid().replaceAll("\\s+", " "));
+                            userModel.setPassword(password.replaceAll("\\s+", " "));
+                            userModel.setUserType(userType.replaceAll("\\s+", " "));
+                            userModel.setPhone(phone.replaceAll("\\s+", " "));
+                            userModel.setName(name.replaceAll("\\s+", " "));
                             userModel.setImageURL("image");
                             insertDatabase(userModel);
                             onLoginSuccess(userModel,password);

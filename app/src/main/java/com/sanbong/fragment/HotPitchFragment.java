@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.sanbong.R;
 import com.sanbong.adapter.FindPitchAdapter;
@@ -25,16 +24,16 @@ import java.util.ArrayList;
 public class HotPitchFragment extends Fragment implements FindPitchAdapter.PitchClickInterface ,
         OrderPitchDialog.OrderPitchDialogInterface {
  public static final String TAG = "Find match";
-    RecyclerView recyclerView;
-    ArrayList<Pitch> listPitches;
-    MaterialBetterSpinner spinner_location;
+    private  RecyclerView recyclerView;
+    private  ArrayList<Pitch> listPitches;
+    private  MaterialBetterSpinner spinner_location;
     private ArrayList<String> arrayLocation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_find_pitch, container, false);
 
-        initSpinner();
+//        initSpinner();
         initView(rootView);
 
         FindPitchAdapter adapter = new FindPitchAdapter(getActivity(),initData());
@@ -51,11 +50,11 @@ public class HotPitchFragment extends Fragment implements FindPitchAdapter.Pitch
     public void initView(View v)
     {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        spinner_location = (MaterialBetterSpinner) v.findViewById(R.id.match_location);
-        ArrayAdapter<String> adapterLocation = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayLocation);
+//        spinner_location = (MaterialBetterSpinner) v.findViewById(R.id.match_location);
+//        ArrayAdapter<String> adapterLocation = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,arrayLocation);
 
-        spinner_location.setAdapter(adapterLocation);
-
+//        spinner_location.setAdapter(adapterLocation);
+//
 
     }
     public void initSpinner()

@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.sanbong.R;
@@ -18,15 +20,15 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * Created by Diep_Chelsea on 20/07/2016.
  */
-public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.RecyclerViewHolder> {
-
+public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.RecyclerViewHolder> implements Filterable{
+    private static String TAG="FindPitchAdapter";
     ArrayList<Pitch> list;
     Activity context;
     public FindPitchAdapter(Activity context, ArrayList<Pitch> listData) {
         this.context = context;
         this.list = listData;
     }
-
+    ArrayList<Pitch> results;
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -50,6 +52,69 @@ public class FindPitchAdapter extends RecyclerView.Adapter<FindPitchAdapter.Recy
     public int getItemCount() {
         return list.size();
     }
+    public ArrayList<Pitch> initData()
+    {
+        list = new ArrayList<>();
+        list.add(new Pitch("id","id","600k 2 tiếng","a bc ","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        list.add(new Pitch("id","id","600k 2 tiếng","d e f","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        list.add(new Pitch("id","id","600k 2 tiếng","acx","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        list.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        list.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        list.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        return list;
+    }
+    public void initList()
+    {
+        list=initData();
+    }
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                
+                list = (ArrayList<Pitch>) results.values;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+                ArrayList<Pitch> filteredArray = getFilteredResults(constraint);
+                results.count = filteredArray.size();
+                results.values = filteredArray;
+                return results;
+            }
+        };
+
+        return filter;
+    }
+
+    private ArrayList<Pitch> getFilteredResults(CharSequence constraint) {
+        results = new ArrayList<>();
+        int count=0;
+        constraint = constraint.toString().toLowerCase();
+        Log.d(TAG,"constraint "+constraint.length());
+        Log.d(TAG,"list "+list.size());
+        for(int i =0;i<list.size();i++)
+        {
+            if(list.get(i).getName().toLowerCase().contains(constraint) || list.get(i).getLocation().toLowerCase().contains(constraint)
+                    || list.get(i).getMoney().toLowerCase().contains(constraint)
+                    || list.get(i).getOwnerName().toLowerCase().contains(constraint)
+                     )
+            {
+                results.add(list.get(i));
+                count++;
+            }
+        }
+        Log.d(TAG,"count "+count);
+        Log.d(TAG,"result size: "+results.size());
+        return results;
+    }
+
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tv_name,tv_owner,tv_location,tv_money,tv_contact;
         FancyButton booknow,readmore;

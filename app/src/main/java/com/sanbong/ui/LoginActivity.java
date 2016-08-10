@@ -31,16 +31,17 @@ import com.sanbong.model.UserModel;
 import com.sanbong.utils.ShowToask;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView tv_signUp,bt_login,tv_forgot;
-    EditText edt_email,edt_password;
-    SharedPreferences sharedPreferences;
-    FirebaseUser firebaseUser ;
-    FirebaseDatabase database;
-    DatabaseReference databaseReference;
-    FirebaseAuth.AuthStateListener authStateListener;
-    FirebaseAuth auth;
-    UserModel userModel;
-    Dialog dialog;
+    public static String TAG="LoginActivity";
+    private TextView tv_signUp,bt_login,tv_forgot;
+    private  EditText edt_email,edt_password;
+    private  SharedPreferences sharedPreferences;
+    private FirebaseUser firebaseUser ;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseAuth auth;
+    private  UserModel userModel;
+    private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         database = FirebaseDatabase.getInstance();
     }
+    public void initView()
+    {
+        tv_signUp = (TextView) findViewById(R.id.link_signup);
+        tv_forgot = (TextView) findViewById(R.id.link_forgot);
+        bt_login= (TextView) findViewById(R.id.btn_login);
+        edt_password = (EditText) findViewById(R.id.input_password);
+        edt_email = (EditText) findViewById(R.id.input_email);
+        bt_login.setOnClickListener(this);
+        tv_signUp.setOnClickListener(this);
+        tv_forgot.setOnClickListener(this);
 
+
+        edt_email.setText("team@gmail.com");
+        edt_password.setText("123456");
+    }
     public void demo()
     {
         auth = FirebaseAuth.getInstance();
@@ -79,6 +94,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                             Log.d("loginFirebase", "signInWithEmail:failed", task.getException());
+                            dialog.dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Đăng nhập thất bại, thử lại sau");
+                            builder.setCancelable(true);
+                            builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.create().show();
                         }
                         else
                         {
@@ -107,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                     dialog.dismiss();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                    builder.setMessage("Không thể tạo tài khoản, vui lòng thử lại sau");
+                                    builder.setMessage("Đăng nhập thất bại, thử lại sau");
                                     builder.setCancelable(true);
                                     builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
@@ -168,17 +194,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.commit();
 
     }
-    public void initView()
-    {
-        tv_signUp = (TextView) findViewById(R.id.link_signup);
-        tv_forgot = (TextView) findViewById(R.id.link_forgot);
-        bt_login= (TextView) findViewById(R.id.btn_login);
-        edt_password = (EditText) findViewById(R.id.input_password);
-        edt_email = (EditText) findViewById(R.id.input_email);
-        bt_login.setOnClickListener(this);
-        tv_signUp.setOnClickListener(this);
-        tv_forgot.setOnClickListener(this);
-    }
+
     public boolean validate(String email,String password) {
         boolean valid = true;
 

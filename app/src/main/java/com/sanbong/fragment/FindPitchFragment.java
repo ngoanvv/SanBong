@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.sanbong.R;
 import com.sanbong.adapter.FindPitchAdapter;
@@ -23,9 +26,11 @@ import java.util.ArrayList;
  */
 public class FindPitchFragment extends Fragment implements FindPitchAdapter.PitchClickInterface , OrderPitchDialog.OrderPitchDialogInterface{
     public static final String TAG = "Find match";
-    RecyclerView recyclerView;
-    ArrayList<Pitch> listPitches;
-    MaterialBetterSpinner spinner_location;
+    private RecyclerView recyclerView;
+    private ArrayList<Pitch> listPitches;
+    private EditText input_search;
+    private FindPitchAdapter adapter;
+    private MaterialBetterSpinner spinner_location;
     private ArrayList<String> arrayLocation;
 
     @Override
@@ -33,7 +38,7 @@ public class FindPitchFragment extends Fragment implements FindPitchAdapter.Pitc
         View rootView= inflater.inflate(R.layout.fragment_find_pitch, container, false);
         initView(rootView);
 
-        FindPitchAdapter adapter = new FindPitchAdapter(getActivity(),initData());
+        adapter = new FindPitchAdapter(getActivity(),initData());
         adapter.setmPitchClickInterface(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -47,14 +52,32 @@ public class FindPitchFragment extends Fragment implements FindPitchAdapter.Pitc
     public void initView(View v)
     {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        input_search = (EditText) v.findViewById(R.id.edt_input);
 
+        input_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    adapter.initList();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
     public ArrayList<Pitch> initData()
     {
         listPitches = new ArrayList<>();
-        listPitches.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
-        listPitches.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
-        listPitches.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        listPitches.add(new Pitch("id","id","600k 2 tiếng","a bc ","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        listPitches.add(new Pitch("id","id","600k 2 tiếng","d e f","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
+        listPitches.add(new Pitch("id","id","600k 2 tiếng","acx","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
         listPitches.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
         listPitches.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));
         listPitches.add(new Pitch("id","id","600k 2 tiếng","Sân bóng FECON","144 Xuân thủy, Cầu Giấy","MR Dương","0989793382"));

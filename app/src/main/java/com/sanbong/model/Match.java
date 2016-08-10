@@ -4,16 +4,16 @@ package com.sanbong.model;
  * Created by Diep_Chelsea on 13/07/2016.
  */
 public class Match {
-    String id;
-    String time;
-    String hostName;
-    String stadium;
-    String description;
-    String location;
-    String money;
+    private String hostID;
+    private String time;
+    private  String hostName;
+    private  String stadium;
+    private  String description;
+    private  String location;
+    private  String money;
 
     public Match(String id, String time, String hostName, String stadium, String description, String location, String money) {
-        this.id = id;
+        this.hostID = id;
         this.time = time;
         this.hostName = hostName;
         this.stadium = stadium;
@@ -21,6 +21,8 @@ public class Match {
         this.location = location;
         this.money = money;
     }
+    public Match()
+    {}
 
     public String getMoney() {
         return money;
@@ -38,12 +40,12 @@ public class Match {
         this.stadium = stadium;
     }
 
-    public String getId() {
-        return id;
+    public String getHostId() {
+        return hostID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setHostId(String id) {
+        this.hostID = id;
     }
 
     public String getTime() {
@@ -76,5 +78,18 @@ public class Match {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "hostID='" + hostID + '\'' +
+                ", time='" + time + '\'' +
+                ", hostName='" + hostName + '\'' +
+                ", stadium='" + stadium + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", money='" + money + '\'' +
+                '}';
     }
 }

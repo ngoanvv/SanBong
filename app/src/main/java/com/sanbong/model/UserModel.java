@@ -20,6 +20,19 @@ public class UserModel implements Serializable {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", userType='" + userType + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }

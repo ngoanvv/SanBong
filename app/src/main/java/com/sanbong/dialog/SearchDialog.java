@@ -21,10 +21,10 @@ public class SearchDialog extends DialogFragment implements View.OnClickListener
     public static final String TAG = "DeleteOffer";
     private ArrayList<String> arraySpinner;
     private ArrayList<String> arraySpinner2;
-    Button searchBt;
-    Button cancelBtn;
-    Boolean addressed,typed;
-    MaterialBetterSpinner spinner_address,spinner_type;
+    private Button searchBt;
+    private  Button cancelBtn;
+    private Boolean addressed,typed;
+    private  MaterialBetterSpinner spinner_address,spinner_type;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
