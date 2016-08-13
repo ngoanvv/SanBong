@@ -117,7 +117,7 @@
             android:layout_gravity="center_vertical"
             android:inputType="textMultiLine"
             android:textColor="@color/accent_material_light"
-            android:hint="Thời gian diễn ra trận đấu ?"
+            android:hint="Địa chỉ"
             android:textColorHint="@color/blueGray" />
          </LinearLayout>
         <LinearLayout
@@ -141,7 +141,6 @@
                 android:layout_marginLeft="25dp"
                 android:layout_gravity="center_vertical"
                 android:inputType="textMultiLine"
-                android:focusableInTouchMode="false"
                 android:textColor="@color/accent_material_light"
                 android:hint="Miêu tả về trận đấu này"
                 android:textColorHint="@color/blueGray" />
@@ -158,6 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="50dp"
+            android:background="@color/myAccentColor"
             android:text="Đăng bài"
             android:theme="@style/RaiseButton"
             />
@@ -167,6 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="50dp"
+                android:background="@color/colorRed"
                 android:text="Quay lại"
                 android:theme="@style/RaiseButton"
                 />

@@ -1,6 +1,9 @@
 package com.sanbong.fragment;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.sanbong.CONSTANT;
 import com.sanbong.R;
 import com.sanbong.adapter.FindMatchAdapter;
 import com.sanbong.adapter.FindPitchAdapter;
@@ -23,6 +31,9 @@ import com.sanbong.model.Match;
 import com.sanbong.utils.ShowToask;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -30,28 +41,19 @@ import java.util.ArrayList;
  */
 public class FindMatchFragment extends Fragment implements FindMatchAdapter.MatchClickInterface ,
         AcceptMatchDialog.onAcceptMatchClick, FindPitchAdapter.PitchClickInterface {
-    public static final String TAG = "Find match";
+    public static final String TAG = "FindMatchFragment";
     private RecyclerView recyclerView;
     private ArrayList<Match> listMatches;
     private MaterialBetterSpinner spinner_location,spinner_time;
     private ArrayList<String> arrayLocation, arrayTime;
     private EditText edt_input_search;
     private FindMatchAdapter adapter;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseReference;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_find_match, container, false);
-//        initSpinner();
+        new MyTask().doInBackground("");
         initView(rootView);
-
-        adapter = new FindMatchAdapter(getActivity(),initData());
-        adapter.setMatchClickInterface(this);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
-
         return rootView;
     }
 
@@ -100,36 +102,88 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
         arrayTime.add("Sân cỏ tự nhiên");
 
     }
-    public ArrayList<Match> initData()
+    private class MyTask extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+        @Override
+        protected String doInBackground(String... params) {
+
+            initData();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage(getActivity().getString(R.string.processing));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+    public void initData()
     {
-        listMatches = new ArrayList<>();
-//        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","FECON  Stadium","Đá giao lưu nhẹ nhàng, mong gặp đối thủ lâu dài thường xuyên, liên hệ số 0998989898","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-//        listMatches.add(new Match("1","18h ngày 12-7","MU FC","Old Traford Stadium","Đá giao lưu","144 Hồ tùng mậu , Cầu Giấy","100k chia đôi"));
-//        listMatches.add(new Match("1","18h ngày 13-7","MC FC","ETIHAD Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-//        listMatches.add(new Match("1","18h ngày 14-7","Arsenal FC","Emirates Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy","100k chia đôi"));
-//        listMatches.add(new Match("1","18h ngày 11-7","Chelsea FC","Stamford Bridge Stadium","Đá giao lưu","144 Xuân Thủy, Cầu Giấy, Hà Nội","100k chia đôi"));
+         listMatches= new ArrayList<>();
+         mDatabaseReference = FirebaseDatabase.getInstance().getReference("matchs");
+         mDatabaseReference.addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+                     Match match = new Match();
+                     match.setHostID((String) messageSnapshot.child("hostID").getValue());
+                     match.setDescription( (String) messageSnapshot.child("description").getValue());
+                     match.setHostName((String) messageSnapshot.child("hostname").getValue());
+                     match.setLocation((String) messageSnapshot.child("location").getValue());
+                     match.setMoney((String) messageSnapshot.child("money").getValue());
+                     match.setStadium( (String) messageSnapshot.child("stadium").getValue());
+                     match.setTime((String) messageSnapshot.child("time").getValue());
+                     listMatches.add(match);
+                 }
+                 adapter = new FindMatchAdapter(getActivity(),listMatches);
+                 adapter.setMatchClickInterface(FindMatchFragment.this);
+                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                 recyclerView.setLayoutManager(linearLayoutManager);
+                 recyclerView.setAdapter(adapter);
 
+             }
 
-        return listMatches;
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+
+             }
+         });
+
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d("onActivityCreated","onActivityCreated");
     }
 
 
     @Override
-    public void onClickAcceptMatch() {
+    public void onClickAcceptMatch(Match match) {
             AcceptMatchDialog dialog = new AcceptMatchDialog();
             dialog.setAcceptMatch(this);
             dialog.show(getFragmentManager(),TAG);
     }
 
     @Override
-    public void onClickReadMore() {
+    public void onClickReadMore(Match match) {
+        AcceptMatchFragment fragment = new AcceptMatchFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(CONSTANT.MATCH,match);
+        Log.d(TAG,match.toString());
+        fragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
-                      .replace(R.id.container,new AcceptMatchFragment(),AcceptMatchFragment.TAG).addToBackStack(null).commit();
+                      .replace(R.id.container,fragment,AcceptMatchFragment.TAG).addToBackStack(null).commit();
                 }
 
 

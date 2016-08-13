@@ -11,7 +11,7 @@
         android:id="@+id/navigationHeader"
         android:paddingTop="24dp">
 
-        <ImageView
+        <com.sanbong.custom_view.RoundedImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:id="@+id/imgAvatar"

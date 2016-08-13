@@ -9,242 +9,221 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="wrap_content"
+<RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     >
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="3"
-        >
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
     <com.sanbong.custom_view.RoundedImageView
         android:id="@+id/match_image2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/logo_chelsea"
-        />
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="50dp"
+    android:background="@drawable/logo_chelsea"
+    />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_20sp"
-        android:text="Chelsea FC"
-        />
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="italic"
-        android:gravity="center_horizontal"
-        android:textSize="@dimen/text_size_15sp"
-        android:text="Keep the blue flag flying high"
-        />
-    </LinearLayout>
-    <com.sanbong.custom_view.RoundedImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_weight="2"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/img_vs"
-        >
-
-    </com.sanbong.custom_view.RoundedImageView>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="3"
-        >
-        <com.sanbong.custom_view.RoundedImageView
-            android:id="@+id/match_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/logo_mu"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text_size_20sp"
-            android:text="Manchester Utd"
-            />
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorBlack"
-            android:textStyle="italic"
-            android:textSize="@dimen/text_size_15sp"
-            android:text="The Red devils"
-            />
-    </LinearLayout>
-</LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Thông tin kèo bóng"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/height_20dp"
-        android:textColor="@color/myAccentColor"
-        android:textSize="@dimen/text_size_20sp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_height="20dp">
-        <com.sanbong.custom_view.RoundedImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/ic_dollars"
-            android:layout_gravity="center_vertical"
-            />
-        <TextView
-            android:id="@+id/item_money"
-            android:layout_width="wrap_content"
-            android:text="250k, chia đôi"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/coloWhite"
-            android:layout_height="wrap_content"/>
+<TextView
+android:id="@+id/item_hostName"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="5dp"
+android:textStyle="bold"
+android:layout_gravity="center_horizontal"
+android:textColor="@color/colorBlack"
+android:textSize="@dimen/text_size_20sp"
+android:text="Chelsea FC"
+    />
+<TextView
+android:layout_width="150dp"
+android:layout_height="wrap_content"
+android:layout_marginTop="10dp"
+android:textColor="@color/colorBlack"
+android:textStyle="italic"
+android:gravity="center_horizontal"
+android:textSize="@dimen/text_size_15sp"
+android:text="Keep the blue flag flying high"
+    />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="40dp"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <com.sanbong.custom_view.RoundedImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_clock"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/item_time"
-            android:text="18h, ngày 28/12/2016"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/coloWhite"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginLeft="40dp"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <com.sanbong.custom_view.RoundedImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_stadium"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/item_stadium"
-            android:textSize="20sp"
-            android:text="Sân bóng FECON"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/coloWhite"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginBottom="5dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <com.sanbong.custom_view.RoundedImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_location"
-            />
-        <TextView
-            android:id="@+id/item_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="144 Xuân Thủy, Cầu Giấy, Hà Nội"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/coloWhite"
-            android:clickable="true"/>
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        >
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/bt_contact"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/coloWhite"
-            android:background="@color/colorRed"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="50dp"
-            fancy:fb_textSize="20dp"
-            fancy:fb_borderColor="#FFFFFF"
-            fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="#7ab800"
-            fancy:fb_focusColor="#9bd823"
-            fancy:fb_iconPosition="left"
-            fancy:fb_radius="30dp"
-            fancy:fb_text="Liên hệ"
-            fancy:fb_textColor="#FFFFFF"
-            />
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/bt_accept"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            fancy:fb_borderColor="#FFFFFF"
-            fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="@color/colorRed"
-            fancy:fb_focusColor="#9bd823"
-            fancy:fb_iconPosition="left"
-            fancy:fb_radius="30dp"
-            fancy:fb_text="Nhận kèo"
-            fancy:fb_textColor="#FFFFFF"
-            fancy:fb_textSize="20dp"
-            android:textColor="@color/coloWhite"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="50dp"
-            />
     </RelativeLayout>
-
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textStyle="bold"
+android:text="Thông tin kèo bóng"
+android:layout_gravity="center_horizontal"
+android:layout_marginTop="@dimen/height_20dp"
+android:textColor="@color/myAccentColor"
+android:textSize="@dimen/text_size_20sp"
+    />
+<LinearLayout
+android:layout_width="match_parent"
+android:orientation="horizontal"
+android:layout_marginTop="20dp"
+android:layout_marginLeft="40dp"
+android:layout_height="20dp">
+<com.sanbong.custom_view.RoundedImageView
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:background="@drawable/ic_note"
+    android:layout_gravity="center_vertical"
+    />
+<TextView
+    android:id="@+id/item_description"
+    android:layout_width="wrap_content"
+    android:text="250k, chia đôi"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center_vertical"
+    android:textColor="@color/lightGreen"
+    android:layout_height="wrap_content"/>
+</LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:orientation="horizontal"
+android:layout_marginTop="10dp"
+android:layout_marginLeft="40dp"
+android:layout_height="20dp">
+<com.sanbong.custom_view.RoundedImageView
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:background="@drawable/ic_dollars"
+    android:layout_gravity="center_vertical"
+    />
+<TextView
+    android:id="@+id/item_money"
+    android:layout_width="wrap_content"
+    android:text="250k, chia đôi"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center_vertical"
+    android:textColor="@color/lightGreen"
+    android:layout_height="wrap_content"/>
 </LinearLayout>
 
+<LinearLayout
+android:layout_marginTop="10dp"
+android:layout_marginLeft="40dp"
+android:layout_width="match_parent"
+android:orientation="horizontal"
+android:layout_height="wrap_content">
+<com.sanbong.custom_view.RoundedImageView
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/ic_clock"
+    />
+<TextView
+    android:layout_width="wrap_content"
+    android:id="@+id/item_time"
+    android:text="18h, ngày 28/12/2016"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center_vertical"
+    android:textColor="@color/lightGreen"
+    android:layout_height="wrap_content"/>
 </LinearLayout>
+<LinearLayout
+android:layout_marginLeft="40dp"
+android:layout_width="match_parent"
+android:layout_marginTop="10dp"
+android:orientation="horizontal"
+android:layout_height="wrap_content">
+<com.sanbong.custom_view.RoundedImageView
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/ic_stadium"
+    />
+<TextView
+    android:layout_width="wrap_content"
+    android:id="@+id/item_stadium"
+    android:textSize="20sp"
+    android:text="Sân bóng FECON"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center_vertical"
+    android:textColor="@color/lightGreen"
+    android:layout_height="wrap_content"/>
+</LinearLayout>
+
+<LinearLayout
+android:layout_marginBottom="5dp"
+android:layout_width="match_parent"
+android:layout_marginLeft="40dp"
+android:layout_marginTop="10dp"
+android:orientation="horizontal"
+android:layout_height="wrap_content">
+<com.sanbong.custom_view.RoundedImageView
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/ic_location"
+    />
+<TextView
+    android:id="@+id/item_location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="20sp"
+    android:text="144 Xuân Thủy, Cầu Giấy, Hà Nội"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center_vertical"
+    android:textColor="@color/lightGreen"
+    android:clickable="true"/>
+</LinearLayout>
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_marginTop="40dp"
+    >
+<mehdi.sakout.fancybuttons.FancyButton
+    android:id="@+id/bt_contact"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:textColor="@color/lightGreen"
+    android:background="@color/colorRed"
+    android:layout_gravity="center_vertical"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_marginLeft="50dp"
+    fancy:fb_textSize="20dp"
+    fancy:fb_borderColor="#FFFFFF"
+    fancy:fb_borderWidth="1dp"
+    fancy:fb_defaultColor="#7ab800"
+    fancy:fb_focusColor="#9bd823"
+    fancy:fb_iconPosition="left"
+    fancy:fb_radius="30dp"
+    fancy:fb_text="Liên hệ"
+    fancy:fb_textColor="#FFFFFF"
+    />
+<mehdi.sakout.fancybuttons.FancyButton
+    android:id="@+id/bt_accept"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    fancy:fb_borderColor="#FFFFFF"
+    fancy:fb_borderWidth="1dp"
+    fancy:fb_defaultColor="@color/colorRed"
+    fancy:fb_focusColor="#9bd823"
+    fancy:fb_iconPosition="left"
+    fancy:fb_radius="30dp"
+    fancy:fb_text="Nhận kèo"
+    fancy:fb_textColor="#FFFFFF"
+    fancy:fb_textSize="20dp"
+    android:textColor="@color/lightGreen"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:layout_marginRight="50dp"
+    />
+</RelativeLayout>
+
+    </LinearLayout>
+
+    </LinearLayout>

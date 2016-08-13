@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sân bóng của tôi</string>
+    <string name="app_name">Sân phủi</string>
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Cài đặt</string>
@@ -18,6 +18,11 @@
     <string name="name_length">Độ dài cần lớn hơn 4 ký tự</string>
     <string name="invalid_repassword">Mật khẩu xác nhận không khớp</string>
     <string name="invalid_phone">Số điện thoại không hợp lệ (9-12 ký tự )</string>
+    <string name="upload_later">Bạn có thể cập nhật ảnh đại diện cho đội bóng sau này ở mục Cài đặt</string>
+
+
+
+
 
     <string name="login">Đăng nhập</string>
     <string name="link_signUp">Chưa có tài khoản ? Đăng ký ngay</string>
@@ -40,6 +45,7 @@
     <string name="txt_no">Hủy</string>
     <string name="ok">Đồng ý</string>
     <string name="failed">Thất bại</string>
+    <string name="processing">Đang xử lý</string>
 
     <string name="invalid_length">Độ dài cần lớn hơn 6 ký tự để đảm bảo không có quá ít thông tin</string>
 

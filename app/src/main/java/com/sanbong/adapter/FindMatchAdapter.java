@@ -40,7 +40,7 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
 
         holder.tv_descrip.setText(list.get(position).getDescription());
         holder.tv_hostname.setText(list.get(position).getHostName());
@@ -48,7 +48,25 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
         holder.tv_location.setText(list.get(position).getLocation());
         holder.tv_stadium.setText(list.get(position).getStadium());
         holder.tv_money.setText(list.get(position).getMoney());
+        holder.accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                matchClickInterface.onClickAcceptMatch(list.get(position));
 
+            }
+        });
+        holder.readmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                matchClickInterface.onClickReadMore(list.get(position));
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                matchClickInterface.onClickReadMore(list.get(position));
+            }
+        });
     }
 
     @Override
@@ -121,7 +139,6 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-
             tv_hostname = (TextView) itemView.findViewById(R.id.items_name);
             tv_time = (TextView) itemView.findViewById(R.id.item_time);
             tv_location = (TextView) itemView.findViewById(R.id.item_location);
@@ -132,26 +149,7 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
             accept = (FancyButton) itemView.findViewById(R.id.bt_accept);
             readmore = (FancyButton) itemView.findViewById(R.id.bt_readmore);
 
-            accept.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    matchClickInterface.onClickAcceptMatch();
 
-                }
-            });
-            readmore.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    matchClickInterface.onClickReadMore();
-
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        Log.d("match click","true");
-                }
-            });
         }
 
     }
@@ -164,7 +162,7 @@ public class FindMatchAdapter extends RecyclerView.Adapter<FindMatchAdapter.Recy
     }
     public interface MatchClickInterface
     {
-        public void onClickAcceptMatch();
-        public void onClickReadMore();
+        public void onClickAcceptMatch(Match match);
+        public void onClickReadMore(Match match);
     }
 }

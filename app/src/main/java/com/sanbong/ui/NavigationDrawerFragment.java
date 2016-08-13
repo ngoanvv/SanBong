@@ -30,7 +30,9 @@ import android.widget.TextView;
 
 import com.sanbong.R;
 import com.sanbong.custom_view.NavigationItem;
+import com.sanbong.custom_view.RoundedImageView;
 import com.sanbong.model.UserModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -278,11 +280,11 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void setUserData(String user, String email, Bitmap avatar) {
-        ImageView avatarContainer = (ImageView) mFragmentContainerView.findViewById(R.id.imgAvatar);
+    public void setUserData(String user, String email, String avatar) {
+        RoundedImageView avatarContainer = (RoundedImageView) mFragmentContainerView.findViewById(R.id.imgAvatar);
         ((TextView) mFragmentContainerView.findViewById(R.id.txtUserEmail)).setText(email);
         ((TextView) mFragmentContainerView.findViewById(R.id.txtUsername)).setText(user);
-        avatarContainer.setImageDrawable(new RoundImage(avatar));
+        Picasso.with(getActivity()).load(avatar).fit().into(avatarContainer);
     }
 
     public View getGoogleDrawer() {

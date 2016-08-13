@@ -30,6 +30,8 @@ import com.sanbong.R;
 import com.sanbong.model.UserModel;
 import com.sanbong.utils.ShowToask;
 
+import java.util.Calendar;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static String TAG="LoginActivity";
     private TextView tv_signUp,bt_login,tv_forgot;
@@ -50,7 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initDb();
         sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
         if(sharedPreferences!=null)   flash();
-
     }
     public void initDb()
     {

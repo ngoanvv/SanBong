@@ -1,8 +1,10 @@
 package com.sanbong.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -91,6 +93,33 @@ public class CreateMatchFragment extends Fragment implements View.OnClickListene
 //    String description;
 //    String location;
 //    String money;
+        private class MyTask extends AsyncTask<String, Void, String> {
+            ProgressDialog progressDialog;
+            @Override
+            protected String doInBackground(String... params) {
+
+                createMatch();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                progressDialog.dismiss();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage(getActivity().getString(R.string.processing));
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+
+            @Override
+            protected void onProgressUpdate(Void... values) {
+            }
+        }
+
     public void showTimePicker(final int year, final int month, final int day)
     {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
@@ -132,7 +161,7 @@ public class CreateMatchFragment extends Fragment implements View.OnClickListene
         stadium     = edt_stadium.getText().toString();
 
         Match match = new Match();
-                match.setHostId(userModel.getId());
+                match.setHostID(userModel.getId());
                 match.setDescription(description);
                 match.setHostName(userModel.getName());
                 match.setLocation(address);
@@ -143,9 +172,14 @@ public class CreateMatchFragment extends Fragment implements View.OnClickListene
 
         Log.d(TAG,match.toString());
 
-
+        // generate key by date created
+        Calendar calendar = Calendar.getInstance();
         databaseReference = database.getReference().child("matchs");
-        databaseReference.child("hostID").setValue(match.getHostId());
+        String id = calendar.get(Calendar.DAY_OF_MONTH)+"-"+ calendar.get(Calendar.MONTH)+"-" +
+                calendar.get(Calendar.HOUR_OF_DAY)+"-" + calendar.get(Calendar.MINUTE)+"-"+calendar.get(Calendar.SECOND)+"-"+calendar.get(Calendar.MILLISECOND);
+
+        databaseReference = databaseReference.child(id);
+        databaseReference.child("hostID").setValue(match.getHostID());
         databaseReference.child("hostname").setValue(match.getHostName());
         databaseReference.child("time").setValue(match.getTime());
         databaseReference.child("location").setValue(match.getLocation());
@@ -237,7 +271,9 @@ public class CreateMatchFragment extends Fragment implements View.OnClickListene
             case  R.id.bt_create:
             {
                 if(validate())
-                createMatch();
+                {
+                    new MyTask().doInBackground("");
+                }
                 break;
             }
         }

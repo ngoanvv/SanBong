@@ -1,9 +1,12 @@
 package com.sanbong.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Diep_Chelsea on 13/07/2016.
  */
-public class Match {
+public class Match implements Serializable {
+    private String id;
     private String hostID;
     private String time;
     private  String hostName;
@@ -24,6 +27,22 @@ public class Match {
     public Match()
     {}
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getHostID() {
+        return hostID;
+    }
+
+    public void setHostID(String hostID) {
+        this.hostID = hostID;
+    }
+
     public String getMoney() {
         return money;
     }
@@ -40,13 +59,6 @@ public class Match {
         this.stadium = stadium;
     }
 
-    public String getHostId() {
-        return hostID;
-    }
-
-    public void setHostId(String id) {
-        this.hostID = id;
-    }
 
     public String getTime() {
         return time;

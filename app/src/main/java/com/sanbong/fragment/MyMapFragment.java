@@ -168,7 +168,7 @@ public class MyMapFragment extends Fragment implements GoogleMap.OnMarkerClickLi
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         moveCamera(new LatLng(21.029977644,105.8634160));
-        isGPSEnabled(getActivity());
+//        isGPSEnabled(getActivity());
 
         map.setOnMapClickListener(this);
         map.setOnMarkerClickListener(this);

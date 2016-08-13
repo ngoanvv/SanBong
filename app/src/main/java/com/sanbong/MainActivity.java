@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         getSupportActionBar().setTitle("Tìm sân bóng");
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
-        mNavigationDrawerFragment.setUserData("sadasd","adasd", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
+        mNavigationDrawerFragment.setUserData(userModel.getName(),userModel.getEmail(),userModel.getImageURL());
 
     }
 
