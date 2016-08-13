@@ -70,6 +70,7 @@ public class FindMatchFragment extends Fragment implements FindMatchAdapter.Matc
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                     adapter.initList();
+
                     adapter.getFilter().filter(s);
             }
 
